@@ -1,23 +1,31 @@
 ﻿{
   "openapi": "3.0.0",
   "info": {
-    "title": "API Cobranca - Collection Geral",
-    "version": "1.0.0"
+    "title": "Sicredi - API Cobranca",
+    "description": "API para integração de Cobrança Bancária pelo Sicredi",
+    "version": "1.0.0",
+    "contact": {
+      "name": "Fidias",
+      "email": "openfidias@gmail.com",
+      "url": "https://github.com/open-fidias/sicredi-client-api"
+    }
   },
   "servers": [
     {
-      "url": "https://api-parceiro.sicredi.com.br"
+      "url": "https://api-parceiro.sicredi.com.br",
+      "description": "Produção"
     },
     {
-      "url": "https://api-parceiro.sicredi.com.br/sb"
+      "url": "https://api-parceiro.sicredi.com.br/sb",
+      "description": "Homologação"
     }
   ],
   "tags": [
     {
-      "name": "Sandbox"
+      "name": "Sicredi"
     },
     {
-      "name": "Produção"
+      "name": "Cobrança"
     }
   ],
   "security": [
@@ -180,7 +188,12 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
       },
       "get": {
         "tags": [
@@ -258,7 +271,12 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
       }
     },
     "/cobranca/boleto/v1/boletos/{nossoNumero}/baixa": {
@@ -342,861 +360,18 @@
               "application/json": {}
             }
           }
-        }
-      }
-    },
-    "/sb/cobranca/boleto/v1/boletos/211001292/juros": {
-      "patch": {
-        "tags": [
-          "Sandbox"
-        ],
-        "summary": "Instrução Altera Juros",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "example": {
-                  "valorAbatimento": "10.0"
-                }
-              }
-            }
-          }
         },
-        "parameters": [
+        "security": [
           {
-            "name": "Authorization",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJBU0ZSSm1VMTBwaWRpbzFlQ254cXUzV2VwaDFjX2xJWFJDVXk5ZGpTZ0drIn0.eyJleHAiOjE3MjEyMzI1MDIsImlhdCI6MTcyMTIyODkwMiwianRpIjoiNTU4NTRjODItZGQ1MC00ZjgzLWFlNjAtY2E4NzA1NjcxNmE0IiwiaXNzIjoiaHR0cHM6Ly9hdXRoLW9wZW5hcGkudWF0LnNpY3JlZGkuY2xvdWQvcmVhbG1zL29wZW5hcGkiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiZjo4YjU0NzRmZi0xZThlLTRiNzYtOWYyYS1iNmExYTIxMzgzZjY6Q09CUkFOQ0E6MTIzNDU2Nzg5IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoib3BlbmFwaS1ndy1zZW5zZWRpYSIsInNlc3Npb25fc3RhdGUiOiI1OGMyZDE0NS02MWFkLTQ3YmUtODQ4ZC02OGUzNGQwYjdjNmUiLCJhY3IiOiIxIiwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbImRlZmF1bHQtcm9sZXMtb3BlbmFwaSIsIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6ImNvYnJhbmNhIGVtYWlsIHByb2ZpbGUiLCJzaWQiOiI1OGMyZDE0NS02MWFkLTQ3YmUtODQ4ZC02OGUzNGQwYjdjNmUiLCJvcGVuYXBpX3VzZXJuYW1lIjoiMTIzNDU2Nzg5Iiwib3BlbmFwaV9jb250ZXh0IjoiQ09CUkFOQ0EiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInByZWZlcnJlZF91c2VybmFtZSI6IjEyMzQ1Njc4OSJ9.Wlno63OL-QrVhXWooy1c5X-pBVRMBQ8JS128jlu5nP7W8BSztbH-ED0srYPCR-THxyxpq6RGtU40W_xo63maOEZOlzcOeCdA2TfIgWa_IWIj1ML0cir-zE5V-TjV4fQ-DrmzOWSnzzmHjUUUPpI6Y0AabY4ElMSS2nUCKhv5_c2O_76VPc6KJ5TlufQWk0osxRd0TAAERY9OB-YazdiRqIsO9P1AIQKKFKz4htgFIA7xe3ClS9H4v0B0Qmszcm7KhH7VDS4q-P_NzcH8FhPXNgoKLaB_2eh9TUx1_5LnWkenoq_wXZd864qsLZct4In9px6fogb6vfZGSXvZ7c-ORg"
-          },
-          {
-            "name": "Content-Type",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "application/json"
-          },
-          {
-            "name": "codigoBeneficiario",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "12345"
-          },
-          {
-            "name": "cooperativa",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "6789"
-          },
-          {
-            "name": "posto",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "03"
-          },
-          {
-            "name": "x-api-key",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "xxxxxxxx-xxxx-xxxe-xxxx-xxxxxxxxxx"
+            "bearer": []
           }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {}
-            }
-          }
-        }
+        ]
       }
     },
-    "/sb/cobranca/boleto/v1/boletos/211001292/seu-numero": {
-      "patch": {
-        "tags": [
-          "Sandbox"
-        ],
-        "summary": "Instrução Altera Seu Numero",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "example": {
-                  "seuNumero": "0123456789"
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJBU0ZSSm1VMTBwaWRpbzFlQ254cXUzV2VwaDFjX2xJWFJDVXk5ZGpTZ0drIn0.eyJleHAiOjE3MjEyMzI1MDIsImlhdCI6MTcyMTIyODkwMiwianRpIjoiNTU4NTRjODItZGQ1MC00ZjgzLWFlNjAtY2E4NzA1NjcxNmE0IiwiaXNzIjoiaHR0cHM6Ly9hdXRoLW9wZW5hcGkudWF0LnNpY3JlZGkuY2xvdWQvcmVhbG1zL29wZW5hcGkiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiZjo4YjU0NzRmZi0xZThlLTRiNzYtOWYyYS1iNmExYTIxMzgzZjY6Q09CUkFOQ0E6MTIzNDU2Nzg5IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoib3BlbmFwaS1ndy1zZW5zZWRpYSIsInNlc3Npb25fc3RhdGUiOiI1OGMyZDE0NS02MWFkLTQ3YmUtODQ4ZC02OGUzNGQwYjdjNmUiLCJhY3IiOiIxIiwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbImRlZmF1bHQtcm9sZXMtb3BlbmFwaSIsIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6ImNvYnJhbmNhIGVtYWlsIHByb2ZpbGUiLCJzaWQiOiI1OGMyZDE0NS02MWFkLTQ3YmUtODQ4ZC02OGUzNGQwYjdjNmUiLCJvcGVuYXBpX3VzZXJuYW1lIjoiMTIzNDU2Nzg5Iiwib3BlbmFwaV9jb250ZXh0IjoiQ09CUkFOQ0EiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInByZWZlcnJlZF91c2VybmFtZSI6IjEyMzQ1Njc4OSJ9.Wlno63OL-QrVhXWooy1c5X-pBVRMBQ8JS128jlu5nP7W8BSztbH-ED0srYPCR-THxyxpq6RGtU40W_xo63maOEZOlzcOeCdA2TfIgWa_IWIj1ML0cir-zE5V-TjV4fQ-DrmzOWSnzzmHjUUUPpI6Y0AabY4ElMSS2nUCKhv5_c2O_76VPc6KJ5TlufQWk0osxRd0TAAERY9OB-YazdiRqIsO9P1AIQKKFKz4htgFIA7xe3ClS9H4v0B0Qmszcm7KhH7VDS4q-P_NzcH8FhPXNgoKLaB_2eh9TUx1_5LnWkenoq_wXZd864qsLZct4In9px6fogb6vfZGSXvZ7c-ORg"
-          },
-          {
-            "name": "Content-Type",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "application/json"
-          },
-          {
-            "name": "codigoBeneficiario",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "12345"
-          },
-          {
-            "name": "cooperativa",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "6789"
-          },
-          {
-            "name": "posto",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "03"
-          },
-          {
-            "name": "x-api-key",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "xxxxxxxx-xxxx-xxxe-xxxx-xxxxxxxxxx"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {}
-            }
-          }
-        }
-      }
-    },
-    "/sb/cobranca/boleto/v1/boletos/211001292/desconto": {
-      "patch": {
-        "tags": [
-          "Sandbox"
-        ],
-        "summary": "Instrução Altera Desconto",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "example": {
-                  "valorDesconto1": 3.25,
-                  "valorDesconto2": 2.25,
-                  "valorDesconto3": 1.25
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJBU0ZSSm1VMTBwaWRpbzFlQ254cXUzV2VwaDFjX2xJWFJDVXk5ZGpTZ0drIn0.eyJleHAiOjE3MjEyMzI1MDIsImlhdCI6MTcyMTIyODkwMiwianRpIjoiNTU4NTRjODItZGQ1MC00ZjgzLWFlNjAtY2E4NzA1NjcxNmE0IiwiaXNzIjoiaHR0cHM6Ly9hdXRoLW9wZW5hcGkudWF0LnNpY3JlZGkuY2xvdWQvcmVhbG1zL29wZW5hcGkiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiZjo4YjU0NzRmZi0xZThlLTRiNzYtOWYyYS1iNmExYTIxMzgzZjY6Q09CUkFOQ0E6MTIzNDU2Nzg5IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoib3BlbmFwaS1ndy1zZW5zZWRpYSIsInNlc3Npb25fc3RhdGUiOiI1OGMyZDE0NS02MWFkLTQ3YmUtODQ4ZC02OGUzNGQwYjdjNmUiLCJhY3IiOiIxIiwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbImRlZmF1bHQtcm9sZXMtb3BlbmFwaSIsIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6ImNvYnJhbmNhIGVtYWlsIHByb2ZpbGUiLCJzaWQiOiI1OGMyZDE0NS02MWFkLTQ3YmUtODQ4ZC02OGUzNGQwYjdjNmUiLCJvcGVuYXBpX3VzZXJuYW1lIjoiMTIzNDU2Nzg5Iiwib3BlbmFwaV9jb250ZXh0IjoiQ09CUkFOQ0EiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInByZWZlcnJlZF91c2VybmFtZSI6IjEyMzQ1Njc4OSJ9.Wlno63OL-QrVhXWooy1c5X-pBVRMBQ8JS128jlu5nP7W8BSztbH-ED0srYPCR-THxyxpq6RGtU40W_xo63maOEZOlzcOeCdA2TfIgWa_IWIj1ML0cir-zE5V-TjV4fQ-DrmzOWSnzzmHjUUUPpI6Y0AabY4ElMSS2nUCKhv5_c2O_76VPc6KJ5TlufQWk0osxRd0TAAERY9OB-YazdiRqIsO9P1AIQKKFKz4htgFIA7xe3ClS9H4v0B0Qmszcm7KhH7VDS4q-P_NzcH8FhPXNgoKLaB_2eh9TUx1_5LnWkenoq_wXZd864qsLZct4In9px6fogb6vfZGSXvZ7c-ORg"
-          },
-          {
-            "name": "Content-Type",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "application/json"
-          },
-          {
-            "name": "codigoBeneficiario",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "12345"
-          },
-          {
-            "name": "cooperativa",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "6789"
-          },
-          {
-            "name": "posto",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "03"
-          },
-          {
-            "name": "x-api-key",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "xxxxxxxx-xxxx-xxxe-xxxx-xxxxxxxxxx"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {}
-            }
-          }
-        }
-      }
-    },
-    "/sb/cobranca/boleto/v1/boletos/211001292/protesto": {
-      "patch": {
-        "tags": [
-          "Sandbox"
-        ],
-        "summary": "Instrução Protesto",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "example": {}
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJBU0ZSSm1VMTBwaWRpbzFlQ254cXUzV2VwaDFjX2xJWFJDVXk5ZGpTZ0drIn0.eyJleHAiOjE3MjEyMzI1MDIsImlhdCI6MTcyMTIyODkwMiwianRpIjoiNTU4NTRjODItZGQ1MC00ZjgzLWFlNjAtY2E4NzA1NjcxNmE0IiwiaXNzIjoiaHR0cHM6Ly9hdXRoLW9wZW5hcGkudWF0LnNpY3JlZGkuY2xvdWQvcmVhbG1zL29wZW5hcGkiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiZjo4YjU0NzRmZi0xZThlLTRiNzYtOWYyYS1iNmExYTIxMzgzZjY6Q09CUkFOQ0E6MTIzNDU2Nzg5IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoib3BlbmFwaS1ndy1zZW5zZWRpYSIsInNlc3Npb25fc3RhdGUiOiI1OGMyZDE0NS02MWFkLTQ3YmUtODQ4ZC02OGUzNGQwYjdjNmUiLCJhY3IiOiIxIiwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbImRlZmF1bHQtcm9sZXMtb3BlbmFwaSIsIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6ImNvYnJhbmNhIGVtYWlsIHByb2ZpbGUiLCJzaWQiOiI1OGMyZDE0NS02MWFkLTQ3YmUtODQ4ZC02OGUzNGQwYjdjNmUiLCJvcGVuYXBpX3VzZXJuYW1lIjoiMTIzNDU2Nzg5Iiwib3BlbmFwaV9jb250ZXh0IjoiQ09CUkFOQ0EiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInByZWZlcnJlZF91c2VybmFtZSI6IjEyMzQ1Njc4OSJ9.Wlno63OL-QrVhXWooy1c5X-pBVRMBQ8JS128jlu5nP7W8BSztbH-ED0srYPCR-THxyxpq6RGtU40W_xo63maOEZOlzcOeCdA2TfIgWa_IWIj1ML0cir-zE5V-TjV4fQ-DrmzOWSnzzmHjUUUPpI6Y0AabY4ElMSS2nUCKhv5_c2O_76VPc6KJ5TlufQWk0osxRd0TAAERY9OB-YazdiRqIsO9P1AIQKKFKz4htgFIA7xe3ClS9H4v0B0Qmszcm7KhH7VDS4q-P_NzcH8FhPXNgoKLaB_2eh9TUx1_5LnWkenoq_wXZd864qsLZct4In9px6fogb6vfZGSXvZ7c-ORg"
-          },
-          {
-            "name": "Content-Type",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "application/json"
-          },
-          {
-            "name": "codigoBeneficiario",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "12345"
-          },
-          {
-            "name": "cooperativa",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "6789"
-          },
-          {
-            "name": "posto",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "03"
-          },
-          {
-            "name": "x-api-key",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "xxxxxxxx-xxxx-xxxe-xxxx-xxxxxxxxxx"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {}
-            }
-          }
-        }
-      }
-    },
-    "/sb/cobranca/boleto/v1/boletos/211001292/sustar-protesto-baixar-titulo": {
-      "patch": {
-        "tags": [
-          "Sandbox"
-        ],
-        "summary": "Instrução Sustar Protesto Baixar",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "example": ""
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJBU0ZSSm1VMTBwaWRpbzFlQ254cXUzV2VwaDFjX2xJWFJDVXk5ZGpTZ0drIn0.eyJleHAiOjE3MjA1Mzc2OTksImlhdCI6MTcyMDUzNDA5OSwianRpIjoiMTJjMDFhY2UtYzM0ZS00NWI2LTliMjgtODhiZGRhNDA4NDc1IiwiaXNzIjoiaHR0cHM6Ly9hdXRoLW9wZW5hcGkudWF0LnNpY3JlZGkuY2xvdWQvcmVhbG1zL29wZW5hcGkiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiZjo4YjU0NzRmZi0xZThlLTRiNzYtOWYyYS1iNmExYTIxMzgzZjY6Q09CUkFOQ0E6MTIzNDU2Nzg5IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoib3BlbmFwaS1ndy1zZW5zZWRpYSIsInNlc3Npb25fc3RhdGUiOiI4ZGI5NDQzOS00NjM5LTQ5YTYtYTc3OS1hYjU5YTY0NDhlOGIiLCJhY3IiOiIxIiwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbImRlZmF1bHQtcm9sZXMtb3BlbmFwaSIsIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6ImNvYnJhbmNhIGVtYWlsIHByb2ZpbGUiLCJzaWQiOiI4ZGI5NDQzOS00NjM5LTQ5YTYtYTc3OS1hYjU5YTY0NDhlOGIiLCJvcGVuYXBpX3VzZXJuYW1lIjoiMTIzNDU2Nzg5Iiwib3BlbmFwaV9jb250ZXh0IjoiQ09CUkFOQ0EiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInByZWZlcnJlZF91c2VybmFtZSI6IjEyMzQ1Njc4OSJ9.EDCypmbGnyFrQhNqQbIsHUeQ0DDZ_dTJ1OYKnJSlDSVlkgFgPMQTnN373Kq5QfTWCMiOX4z4muk_05Y96Sk1mVO2deAopsgEnG0yZSrygnGg3JnvLrM_iWdzGjoagkc7yaRrbhgIKdnmdAPUNvyWK8sjzTZtTFU1_OPPLZXhAlH5E59d1jkLoAQZJ6wTA7Aocdh6dZBX2QJ5fiaS5NOlGcNdKHvPmSZ2iac7lc5XdirgXtedlDGi2VmWnUO9VKDxTKKDhJdYNB2QG8GMvTmWtj5v3cFXFIPFzS4D8SB5gQQwKF0_bPjwIvsJXk24zUMIbXqVLVBHWoNKmEw1YNBwiA"
-          },
-          {
-            "name": "Content-Type",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "application/json"
-          },
-          {
-            "name": "codigoBeneficiario",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "12345"
-          },
-          {
-            "name": "cooperativa",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "6789"
-          },
-          {
-            "name": "posto",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "03"
-          },
-          {
-            "name": "x-api-key",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "xxxxxxxx-xxxx-xxxe-xxxx-xxxxxxxxxx"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {}
-            }
-          }
-        }
-      }
-    },
-    "/sb/cobranca/boleto/v1/boletos/211001292/sustar-protesto-manter-titulo": {
-      "patch": {
-        "tags": [
-          "Sandbox"
-        ],
-        "summary": "Instrução Sustar Protesto Manter",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "example": ""
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJBU0ZSSm1VMTBwaWRpbzFlQ254cXUzV2VwaDFjX2xJWFJDVXk5ZGpTZ0drIn0.eyJleHAiOjE3MjA1Mzc2OTksImlhdCI6MTcyMDUzNDA5OSwianRpIjoiMTJjMDFhY2UtYzM0ZS00NWI2LTliMjgtODhiZGRhNDA4NDc1IiwiaXNzIjoiaHR0cHM6Ly9hdXRoLW9wZW5hcGkudWF0LnNpY3JlZGkuY2xvdWQvcmVhbG1zL29wZW5hcGkiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiZjo4YjU0NzRmZi0xZThlLTRiNzYtOWYyYS1iNmExYTIxMzgzZjY6Q09CUkFOQ0E6MTIzNDU2Nzg5IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoib3BlbmFwaS1ndy1zZW5zZWRpYSIsInNlc3Npb25fc3RhdGUiOiI4ZGI5NDQzOS00NjM5LTQ5YTYtYTc3OS1hYjU5YTY0NDhlOGIiLCJhY3IiOiIxIiwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbImRlZmF1bHQtcm9sZXMtb3BlbmFwaSIsIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6ImNvYnJhbmNhIGVtYWlsIHByb2ZpbGUiLCJzaWQiOiI4ZGI5NDQzOS00NjM5LTQ5YTYtYTc3OS1hYjU5YTY0NDhlOGIiLCJvcGVuYXBpX3VzZXJuYW1lIjoiMTIzNDU2Nzg5Iiwib3BlbmFwaV9jb250ZXh0IjoiQ09CUkFOQ0EiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInByZWZlcnJlZF91c2VybmFtZSI6IjEyMzQ1Njc4OSJ9.EDCypmbGnyFrQhNqQbIsHUeQ0DDZ_dTJ1OYKnJSlDSVlkgFgPMQTnN373Kq5QfTWCMiOX4z4muk_05Y96Sk1mVO2deAopsgEnG0yZSrygnGg3JnvLrM_iWdzGjoagkc7yaRrbhgIKdnmdAPUNvyWK8sjzTZtTFU1_OPPLZXhAlH5E59d1jkLoAQZJ6wTA7Aocdh6dZBX2QJ5fiaS5NOlGcNdKHvPmSZ2iac7lc5XdirgXtedlDGi2VmWnUO9VKDxTKKDhJdYNB2QG8GMvTmWtj5v3cFXFIPFzS4D8SB5gQQwKF0_bPjwIvsJXk24zUMIbXqVLVBHWoNKmEw1YNBwiA"
-          },
-          {
-            "name": "Content-Type",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "application/json"
-          },
-          {
-            "name": "codigoBeneficiario",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "12345"
-          },
-          {
-            "name": "cooperativa",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "6789"
-          },
-          {
-            "name": "posto",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "03"
-          },
-          {
-            "name": "x-api-key",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "xxxxxxxx-xxxx-xxxe-xxxx-xxxxxxxxxx"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {}
-            }
-          }
-        }
-      }
-    },
-    "/sb/cobranca/boleto/v1/boletos/211001292/cancelar-protesto-automatico": {
-      "patch": {
-        "tags": [
-          "Sandbox"
-        ],
-        "summary": "Instrução Cancelar Protesto Automatico",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "example": {}
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJBU0ZSSm1VMTBwaWRpbzFlQ254cXUzV2VwaDFjX2xJWFJDVXk5ZGpTZ0drIn0.eyJleHAiOjE3MjA1Mzc2OTksImlhdCI6MTcyMDUzNDA5OSwianRpIjoiMTJjMDFhY2UtYzM0ZS00NWI2LTliMjgtODhiZGRhNDA4NDc1IiwiaXNzIjoiaHR0cHM6Ly9hdXRoLW9wZW5hcGkudWF0LnNpY3JlZGkuY2xvdWQvcmVhbG1zL29wZW5hcGkiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiZjo4YjU0NzRmZi0xZThlLTRiNzYtOWYyYS1iNmExYTIxMzgzZjY6Q09CUkFOQ0E6MTIzNDU2Nzg5IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoib3BlbmFwaS1ndy1zZW5zZWRpYSIsInNlc3Npb25fc3RhdGUiOiI4ZGI5NDQzOS00NjM5LTQ5YTYtYTc3OS1hYjU5YTY0NDhlOGIiLCJhY3IiOiIxIiwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbImRlZmF1bHQtcm9sZXMtb3BlbmFwaSIsIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6ImNvYnJhbmNhIGVtYWlsIHByb2ZpbGUiLCJzaWQiOiI4ZGI5NDQzOS00NjM5LTQ5YTYtYTc3OS1hYjU5YTY0NDhlOGIiLCJvcGVuYXBpX3VzZXJuYW1lIjoiMTIzNDU2Nzg5Iiwib3BlbmFwaV9jb250ZXh0IjoiQ09CUkFOQ0EiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInByZWZlcnJlZF91c2VybmFtZSI6IjEyMzQ1Njc4OSJ9.EDCypmbGnyFrQhNqQbIsHUeQ0DDZ_dTJ1OYKnJSlDSVlkgFgPMQTnN373Kq5QfTWCMiOX4z4muk_05Y96Sk1mVO2deAopsgEnG0yZSrygnGg3JnvLrM_iWdzGjoagkc7yaRrbhgIKdnmdAPUNvyWK8sjzTZtTFU1_OPPLZXhAlH5E59d1jkLoAQZJ6wTA7Aocdh6dZBX2QJ5fiaS5NOlGcNdKHvPmSZ2iac7lc5XdirgXtedlDGi2VmWnUO9VKDxTKKDhJdYNB2QG8GMvTmWtj5v3cFXFIPFzS4D8SB5gQQwKF0_bPjwIvsJXk24zUMIbXqVLVBHWoNKmEw1YNBwiA"
-          },
-          {
-            "name": "Content-Type",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "application/json"
-          },
-          {
-            "name": "codigoBeneficiario",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "12345"
-          },
-          {
-            "name": "cooperativa",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "6789"
-          },
-          {
-            "name": "posto",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "03"
-          },
-          {
-            "name": "x-api-key",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "xxxxxxxx-xxxx-xxxe-xxxx-xxxxxxxxxx"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {}
-            }
-          }
-        }
-      }
-    },
-    "/sb/cobranca/boleto/v1/boletos/211001292/conceder-abatimento": {
-      "patch": {
-        "tags": [
-          "Sandbox"
-        ],
-        "summary": "Instrução Conceder Abatimento",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "example": {
-                  "valorAbatimento": "10.0"
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJBU0ZSSm1VMTBwaWRpbzFlQ254cXUzV2VwaDFjX2xJWFJDVXk5ZGpTZ0drIn0.eyJleHAiOjE3MjA1Mzc2OTksImlhdCI6MTcyMDUzNDA5OSwianRpIjoiMTJjMDFhY2UtYzM0ZS00NWI2LTliMjgtODhiZGRhNDA4NDc1IiwiaXNzIjoiaHR0cHM6Ly9hdXRoLW9wZW5hcGkudWF0LnNpY3JlZGkuY2xvdWQvcmVhbG1zL29wZW5hcGkiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiZjo4YjU0NzRmZi0xZThlLTRiNzYtOWYyYS1iNmExYTIxMzgzZjY6Q09CUkFOQ0E6MTIzNDU2Nzg5IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoib3BlbmFwaS1ndy1zZW5zZWRpYSIsInNlc3Npb25fc3RhdGUiOiI4ZGI5NDQzOS00NjM5LTQ5YTYtYTc3OS1hYjU5YTY0NDhlOGIiLCJhY3IiOiIxIiwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbImRlZmF1bHQtcm9sZXMtb3BlbmFwaSIsIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6ImNvYnJhbmNhIGVtYWlsIHByb2ZpbGUiLCJzaWQiOiI4ZGI5NDQzOS00NjM5LTQ5YTYtYTc3OS1hYjU5YTY0NDhlOGIiLCJvcGVuYXBpX3VzZXJuYW1lIjoiMTIzNDU2Nzg5Iiwib3BlbmFwaV9jb250ZXh0IjoiQ09CUkFOQ0EiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInByZWZlcnJlZF91c2VybmFtZSI6IjEyMzQ1Njc4OSJ9.EDCypmbGnyFrQhNqQbIsHUeQ0DDZ_dTJ1OYKnJSlDSVlkgFgPMQTnN373Kq5QfTWCMiOX4z4muk_05Y96Sk1mVO2deAopsgEnG0yZSrygnGg3JnvLrM_iWdzGjoagkc7yaRrbhgIKdnmdAPUNvyWK8sjzTZtTFU1_OPPLZXhAlH5E59d1jkLoAQZJ6wTA7Aocdh6dZBX2QJ5fiaS5NOlGcNdKHvPmSZ2iac7lc5XdirgXtedlDGi2VmWnUO9VKDxTKKDhJdYNB2QG8GMvTmWtj5v3cFXFIPFzS4D8SB5gQQwKF0_bPjwIvsJXk24zUMIbXqVLVBHWoNKmEw1YNBwiA"
-          },
-          {
-            "name": "Content-Type",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "application/json"
-          },
-          {
-            "name": "codigoBeneficiario",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "12345"
-          },
-          {
-            "name": "cooperativa",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "6789"
-          },
-          {
-            "name": "posto",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "03"
-          },
-          {
-            "name": "x-api-key",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "xxxxxxxx-xxxx-xxxe-xxxx-xxxxxxxxxx"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {}
-            }
-          }
-        }
-      }
-    },
-    "/sb/cobranca/boleto/v1/boletos/211001292/cancelar-abatimento": {
-      "patch": {
-        "tags": [
-          "Sandbox"
-        ],
-        "summary": "Instrução Cancelar Abatimento",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "example": {
-                  "valorAbatimento": "10.0"
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJBU0ZSSm1VMTBwaWRpbzFlQ254cXUzV2VwaDFjX2xJWFJDVXk5ZGpTZ0drIn0.eyJleHAiOjE3MjA1Mzc2OTksImlhdCI6MTcyMDUzNDA5OSwianRpIjoiMTJjMDFhY2UtYzM0ZS00NWI2LTliMjgtODhiZGRhNDA4NDc1IiwiaXNzIjoiaHR0cHM6Ly9hdXRoLW9wZW5hcGkudWF0LnNpY3JlZGkuY2xvdWQvcmVhbG1zL29wZW5hcGkiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiZjo4YjU0NzRmZi0xZThlLTRiNzYtOWYyYS1iNmExYTIxMzgzZjY6Q09CUkFOQ0E6MTIzNDU2Nzg5IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoib3BlbmFwaS1ndy1zZW5zZWRpYSIsInNlc3Npb25fc3RhdGUiOiI4ZGI5NDQzOS00NjM5LTQ5YTYtYTc3OS1hYjU5YTY0NDhlOGIiLCJhY3IiOiIxIiwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbImRlZmF1bHQtcm9sZXMtb3BlbmFwaSIsIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6ImNvYnJhbmNhIGVtYWlsIHByb2ZpbGUiLCJzaWQiOiI4ZGI5NDQzOS00NjM5LTQ5YTYtYTc3OS1hYjU5YTY0NDhlOGIiLCJvcGVuYXBpX3VzZXJuYW1lIjoiMTIzNDU2Nzg5Iiwib3BlbmFwaV9jb250ZXh0IjoiQ09CUkFOQ0EiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInByZWZlcnJlZF91c2VybmFtZSI6IjEyMzQ1Njc4OSJ9.EDCypmbGnyFrQhNqQbIsHUeQ0DDZ_dTJ1OYKnJSlDSVlkgFgPMQTnN373Kq5QfTWCMiOX4z4muk_05Y96Sk1mVO2deAopsgEnG0yZSrygnGg3JnvLrM_iWdzGjoagkc7yaRrbhgIKdnmdAPUNvyWK8sjzTZtTFU1_OPPLZXhAlH5E59d1jkLoAQZJ6wTA7Aocdh6dZBX2QJ5fiaS5NOlGcNdKHvPmSZ2iac7lc5XdirgXtedlDGi2VmWnUO9VKDxTKKDhJdYNB2QG8GMvTmWtj5v3cFXFIPFzS4D8SB5gQQwKF0_bPjwIvsJXk24zUMIbXqVLVBHWoNKmEw1YNBwiA"
-          },
-          {
-            "name": "Content-Type",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "application/json"
-          },
-          {
-            "name": "codigoBeneficiario",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "12345"
-          },
-          {
-            "name": "cooperativa",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "6789"
-          },
-          {
-            "name": "posto",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "03"
-          },
-          {
-            "name": "x-api-key",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "xxxxxxxx-xxxx-xxxe-xxxx-xxxxxxxxxx"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {}
-            }
-          }
-        }
-      }
-    },
-    "/sb/cobranca/boleto/v1/boletos/211001292/negativacao": {
-      "patch": {
-        "tags": [
-          "Sandbox"
-        ],
-        "summary": "Instrução Negativação",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "example": {}
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJBU0ZSSm1VMTBwaWRpbzFlQ254cXUzV2VwaDFjX2xJWFJDVXk5ZGpTZ0drIn0.eyJleHAiOjE3MjA1Mzc2OTksImlhdCI6MTcyMDUzNDA5OSwianRpIjoiMTJjMDFhY2UtYzM0ZS00NWI2LTliMjgtODhiZGRhNDA4NDc1IiwiaXNzIjoiaHR0cHM6Ly9hdXRoLW9wZW5hcGkudWF0LnNpY3JlZGkuY2xvdWQvcmVhbG1zL29wZW5hcGkiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiZjo4YjU0NzRmZi0xZThlLTRiNzYtOWYyYS1iNmExYTIxMzgzZjY6Q09CUkFOQ0E6MTIzNDU2Nzg5IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoib3BlbmFwaS1ndy1zZW5zZWRpYSIsInNlc3Npb25fc3RhdGUiOiI4ZGI5NDQzOS00NjM5LTQ5YTYtYTc3OS1hYjU5YTY0NDhlOGIiLCJhY3IiOiIxIiwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbImRlZmF1bHQtcm9sZXMtb3BlbmFwaSIsIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6ImNvYnJhbmNhIGVtYWlsIHByb2ZpbGUiLCJzaWQiOiI4ZGI5NDQzOS00NjM5LTQ5YTYtYTc3OS1hYjU5YTY0NDhlOGIiLCJvcGVuYXBpX3VzZXJuYW1lIjoiMTIzNDU2Nzg5Iiwib3BlbmFwaV9jb250ZXh0IjoiQ09CUkFOQ0EiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInByZWZlcnJlZF91c2VybmFtZSI6IjEyMzQ1Njc4OSJ9.EDCypmbGnyFrQhNqQbIsHUeQ0DDZ_dTJ1OYKnJSlDSVlkgFgPMQTnN373Kq5QfTWCMiOX4z4muk_05Y96Sk1mVO2deAopsgEnG0yZSrygnGg3JnvLrM_iWdzGjoagkc7yaRrbhgIKdnmdAPUNvyWK8sjzTZtTFU1_OPPLZXhAlH5E59d1jkLoAQZJ6wTA7Aocdh6dZBX2QJ5fiaS5NOlGcNdKHvPmSZ2iac7lc5XdirgXtedlDGi2VmWnUO9VKDxTKKDhJdYNB2QG8GMvTmWtj5v3cFXFIPFzS4D8SB5gQQwKF0_bPjwIvsJXk24zUMIbXqVLVBHWoNKmEw1YNBwiA"
-          },
-          {
-            "name": "Content-Type",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "application/json"
-          },
-          {
-            "name": "codigoBeneficiario",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "12345"
-          },
-          {
-            "name": "cooperativa",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "6789"
-          },
-          {
-            "name": "posto",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "03"
-          },
-          {
-            "name": "x-api-key",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "xxxxxxxx-xxxx-xxxe-xxxx-xxxxxxxxxx"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {}
-            }
-          }
-        }
-      }
-    },
-    "/sb/cobranca/boleto/v1/boletos/211001292/sustar-negativacao-baixar-titulo": {
-      "patch": {
-        "tags": [
-          "Sandbox"
-        ],
-        "summary": "Instrução Excluir Negativação Baixar",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "example": ""
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJBU0ZSSm1VMTBwaWRpbzFlQ254cXUzV2VwaDFjX2xJWFJDVXk5ZGpTZ0drIn0.eyJleHAiOjE3MjA1Mzc2OTksImlhdCI6MTcyMDUzNDA5OSwianRpIjoiMTJjMDFhY2UtYzM0ZS00NWI2LTliMjgtODhiZGRhNDA4NDc1IiwiaXNzIjoiaHR0cHM6Ly9hdXRoLW9wZW5hcGkudWF0LnNpY3JlZGkuY2xvdWQvcmVhbG1zL29wZW5hcGkiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiZjo4YjU0NzRmZi0xZThlLTRiNzYtOWYyYS1iNmExYTIxMzgzZjY6Q09CUkFOQ0E6MTIzNDU2Nzg5IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoib3BlbmFwaS1ndy1zZW5zZWRpYSIsInNlc3Npb25fc3RhdGUiOiI4ZGI5NDQzOS00NjM5LTQ5YTYtYTc3OS1hYjU5YTY0NDhlOGIiLCJhY3IiOiIxIiwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbImRlZmF1bHQtcm9sZXMtb3BlbmFwaSIsIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6ImNvYnJhbmNhIGVtYWlsIHByb2ZpbGUiLCJzaWQiOiI4ZGI5NDQzOS00NjM5LTQ5YTYtYTc3OS1hYjU5YTY0NDhlOGIiLCJvcGVuYXBpX3VzZXJuYW1lIjoiMTIzNDU2Nzg5Iiwib3BlbmFwaV9jb250ZXh0IjoiQ09CUkFOQ0EiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInByZWZlcnJlZF91c2VybmFtZSI6IjEyMzQ1Njc4OSJ9.EDCypmbGnyFrQhNqQbIsHUeQ0DDZ_dTJ1OYKnJSlDSVlkgFgPMQTnN373Kq5QfTWCMiOX4z4muk_05Y96Sk1mVO2deAopsgEnG0yZSrygnGg3JnvLrM_iWdzGjoagkc7yaRrbhgIKdnmdAPUNvyWK8sjzTZtTFU1_OPPLZXhAlH5E59d1jkLoAQZJ6wTA7Aocdh6dZBX2QJ5fiaS5NOlGcNdKHvPmSZ2iac7lc5XdirgXtedlDGi2VmWnUO9VKDxTKKDhJdYNB2QG8GMvTmWtj5v3cFXFIPFzS4D8SB5gQQwKF0_bPjwIvsJXk24zUMIbXqVLVBHWoNKmEw1YNBwiA"
-          },
-          {
-            "name": "Content-Type",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "application/json"
-          },
-          {
-            "name": "codigoBeneficiario",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "12345"
-          },
-          {
-            "name": "cooperativa",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "6789"
-          },
-          {
-            "name": "posto",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "03"
-          },
-          {
-            "name": "x-api-key",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "xxxxxxxx-xxxx-xxxe-xxxx-xxxxxxxxxx"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {}
-            }
-          }
-        }
-      }
-    },
-    "/sb/cobranca/boleto/v1/boletos/pdf": {
+    "/cobranca/boleto/v1/boletos/pdf": {
       "get": {
         "tags": [
-          "Sandbox"
+          "Sicredi"
         ],
         "summary": "Imprimir Boleto (PDF)",
         "description": "Gera o PDF do boleto para impressão ou reimpressão (2ª via).",
@@ -1262,211 +437,6 @@
                 }
               }
             }
-          }
-        }
-      }
-    },
-    "/sb/cobranca/boleto/v1/boletos/liquidados/dia": {
-      "get": {
-        "tags": [
-          "Sandbox"
-        ],
-        "summary": "Consulta LIQUIDADOS DIA",
-        "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "Bearer eyJ0eXAiOiJKV1QiLCJraWQiOiIzMWVkMTk1My02YzM1LTRjMWMtOGJmMy1jNTkwZGI4NzE4ZTciLCJhbGciOiJSUzI1NiJ9.eyJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJ0eXAiOiJCZWFyZXIiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiIxMjM0NTY3ODkiLCJzaWQiOiI3NDk1ZmI2NC0xNTI2LTQ0NzYtYWExNC0yZjdmODQyZDZmZmQiLCJhY3IiOiIxIiwib3BlbmFwaV91c2VybmFtZSI6IjEyMzQ1Njc4OSIsIm9wZW5hcGlfY29udGV4dCI6IkNPQlJBTkNBIiwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbImRlZmF1bHQtcm9sZXMtb3BlbmFwaSIsIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iXX0sImF6cCI6Im9wZW5hcGktZ3ctc2Vuc2VkaWEiLCJzY29wZSI6ImNvYnJhbmNhIGVtYWlsIHByb2ZpbGUiLCJzZXNzaW9uX3N0YXRlIjoiNzQ5NWZiNjQtMTUyNi00NDc2LWFhMTQtMmY3Zjg0MmQ2ZmZkIiwianRpIjoiNzQ5NWZiNjQtMTUyNi00NDc2LWFhMTQtMmY3Zjg0MmQ2ZmZkIiwic3ViIjoiZjpjMDA5ZjQyYi05ZWI1LTQ4NTEtODFkNS00NWRmZGQwNTFmMWQ6Q09CUkFOQ0E6MTIzNDU2Nzg5IiwiaXNzIjoiaHR0cHM6Ly9hdXRoLW9wZW5hcGkudWF0LnNpY3JlZGkuY2xvdWQvcmVhbG1zL29wZW5hcGkiLCJpYXQiOjE3MDgzNTA0MTcsImV4cCI6MTcwODM1NDAxNywiYXVkIjoiYWNjb3VudCJ9.d2ATChVYe8d_eretu3U2SpSqudnpltKbLUdW3a1BXifx1HdG9u6Xq54I9VUfLyx2WakJ3XatpD4ordnuZ78Fa2hW3nOBapO14tMZ9WHfxz91EJExU7NW2x-tu8fGJkjiDLkyNeeR8tCGP60Jai-YeJFGeI2ewNZCRqTl0Dg4BwF5pOy3nFLlKC3clHPQPVEvpnkVrAJTy13mpOa6d6XYJbvLrvu5vZ_Y39DP9Ug1suXdiMbiNqaq2vdmAFeRcSKkxncMCGO2fbu7zzQRi_TmYJriI8xwZAU9ux0cYDQdpK9E3LWE0TewW3hsQssrzxvum_3oQh2bINd54xTp-ILgeA"
-          },
-          {
-            "name": "Content-Type",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "application/x-www-form-urlencoded"
-          },
-          {
-            "name": "cooperativa",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "6789"
-          },
-          {
-            "name": "posto",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "03"
-          },
-          {
-            "name": "x-api-key",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "xxxxxxxx-xxxx-xxxe-xxxx-xxxxxxxxxx"
-          },
-          {
-            "name": "codigoBeneficiario",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            },
-            "example": "12345"
-          },
-          {
-            "name": "dia",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            },
-            "example": "10/07/2023"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {}
-            }
-          }
-        }
-      }
-    },
-    "/sb/cobranca/v1/cobranca-financeiro/movimentacoes": {
-      "get": {
-        "tags": [
-          "Sandbox"
-        ],
-        "summary": "Francesinha - Sandbox",
-        "parameters": [
-          {
-            "name": "accept",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "*/*"
-          },
-          {
-            "name": "Authorization",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJBU0ZSSm1VMTBwaWRpbzFlQ254cXUzV2VwaDFjX2xJWFJDVXk5ZGpTZ0drIn0.eyJleHAiOjE3MTg2MzYzNDYsImlhdCI6MTcxODYzMjc0NiwianRpIjoiMzA3Yzc4NTAtNTkzYi00MzkwLTk4MGYtMjBiNTk5Mzk3ZmI1IiwiaXNzIjoiaHR0cHM6Ly9hdXRoLW9wZW5hcGkudWF0LnNpY3JlZGkuY2xvdWQvcmVhbG1zL29wZW5hcGkiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiZjo4YjU0NzRmZi0xZThlLTRiNzYtOWYyYS1iNmExYTIxMzgzZjY6Q09CUkFOQ0E6MTIzNDU2Nzg5IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoib3BlbmFwaS1ndy1zZW5zZWRpYSIsInNlc3Npb25fc3RhdGUiOiJlZTI3Zjk3Ni02OTVlLTQzZDgtOGQwZS1kYjlmYzRlNjk3N2YiLCJhY3IiOiIxIiwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbImRlZmF1bHQtcm9sZXMtb3BlbmFwaSIsIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6ImNvYnJhbmNhIGVtYWlsIHByb2ZpbGUiLCJzaWQiOiJlZTI3Zjk3Ni02OTVlLTQzZDgtOGQwZS1kYjlmYzRlNjk3N2YiLCJvcGVuYXBpX3VzZXJuYW1lIjoiMTIzNDU2Nzg5Iiwib3BlbmFwaV9jb250ZXh0IjoiQ09CUkFOQ0EiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInByZWZlcnJlZF91c2VybmFtZSI6IjEyMzQ1Njc4OSJ9.ElXta6AZE6dMEOEKgijgBpLfpDQ2AxnFat3nyYJFyj7-Tcvdnni_Tb-fD0hZhwheP-YwU5KefROgxVM_yzNYaoZWTJ1roQT4wjrWfcIdgGoa9kC__yx0SAbqJypWzNaMrn1D3WzT6uTrb5XP9_9otHcyXv5SRCDstr9BpMFs8mGFf5iZNYHCZTJlHbkXKn5ac4nXDS9ZucDpbOys16eJ4qEWqDnmJxIQFwzcG7ZNtYA52tfWzNYSO57zDXKOfhKCno_1mhDjuR1Nu-PiDWBEXRkw7JJSkgMnctaFecEjBi09IZ2KSp0KEc88bLq7_OeAm-9SvfVrBnVAe7epqW9Szg"
-          },
-          {
-            "name": "x-api-key",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "xxxxxxxx-xxxx-xxxe-xxxx-xxxxxxxxxx"
-          },
-          {
-            "name": "cooperativa",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            },
-            "example": "6789"
-          },
-          {
-            "name": "codigoBeneficiario",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            },
-            "example": "12345"
-          },
-          {
-            "name": "posto",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            },
-            "example": "03"
-          },
-          {
-            "name": "dataLancamento",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            },
-            "example": "07-09-2023"
-          },
-          {
-            "name": "pagina",
-            "in": "query",
-            "schema": {
-              "type": "integer"
-            },
-            "example": 0
-          },
-          {
-            "name": "tipoMovimento",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            },
-            "example": "CREDITO"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {}
-            }
-          }
-        }
-      }
-    },
-    "/cobranca/boleto/v1/boletos/pdf": {
-      "get": {
-        "tags": [
-          "Produção"
-        ],
-        "summary": "Impressão",
-        "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "Bearer eyJhb4tIW6ijuF09YBCKsngc7OeOaGBsFk_fA"
-          },
-          {
-            "name": "x-api-key",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "linhaDigitavel",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            },
-            "example": "748911600912345592596400000000003"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {}
-            }
           },
           "400": {
             "description": "",
@@ -1477,14 +447,49 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseEntity"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseEntity"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseEntity"
+                }
+              }
+            }
           }
-        }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
       }
     },
     "/cobranca/boleto/v1/boletos/600008054/desconto": {
       "patch": {
         "tags": [
-          "Produção"
+          "Sicredi"
         ],
         "summary": "Instrução Desconto",
         "requestBody": {
@@ -1555,13 +560,18 @@
               "application/json": {}
             }
           }
-        }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
       }
     },
     "/cobranca/boleto/v1/boletos/600007945/desconto": {
       "patch": {
         "tags": [
-          "Produção"
+          "Sicredi"
         ],
         "summary": "Instrução Altera Juros",
         "requestBody": {
@@ -1632,13 +642,18 @@
               "application/json": {}
             }
           }
-        }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
       }
     },
     "/cobranca/boleto/v1/boletos/600007945/seu-numero": {
       "patch": {
         "tags": [
-          "Produção"
+          "Sicredi"
         ],
         "summary": "Instrução Altera Seu Numero",
         "requestBody": {
@@ -1709,13 +724,18 @@
               "application/json": {}
             }
           }
-        }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
       }
     },
     "/cobranca/boleto/v1/boletos/241000727/data-vencimento": {
       "patch": {
         "tags": [
-          "Produção"
+          "Sicredi"
         ],
         "summary": "Instrucao - Altera Vencimento",
         "requestBody": {
@@ -1786,13 +806,18 @@
               "application/json": {}
             }
           }
-        }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
       }
     },
     "/cobranca/boleto/v1/boletos/600007970/data-vencimento": {
       "patch": {
         "tags": [
-          "Produção"
+          "Sicredi"
         ],
         "summary": "Instrucao - Altera Data Desconto",
         "requestBody": {
@@ -1863,13 +888,18 @@
               "application/json": {}
             }
           }
-        }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
       }
     },
     "/cobranca/boleto/v1/boletos/600009999/conceder-abatimento": {
       "patch": {
         "tags": [
-          "Produção"
+          "Sicredi"
         ],
         "summary": "Instrução Conceder Abatimento",
         "requestBody": {
@@ -1940,13 +970,18 @@
               "application/json": {}
             }
           }
-        }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
       }
     },
     "/cobranca/boleto/v1/boletos/600009199/cancelar-abatimento": {
       "patch": {
         "tags": [
-          "Produção"
+          "Sicredi"
         ],
         "summary": "Instrucao Cancelar Abatimento",
         "requestBody": {
@@ -2015,13 +1050,18 @@
               "application/json": {}
             }
           }
-        }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
       }
     },
     "/cobranca/boleto/v1/boletos/600009999/protesto": {
       "patch": {
         "tags": [
-          "Produção"
+          "Sicredi"
         ],
         "summary": "Instrucao Protesto",
         "requestBody": {
@@ -2090,13 +1130,18 @@
               "application/json": {}
             }
           }
-        }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
       }
     },
     "/cobranca/boleto/v1/boletos/60000999/sustar-protesto-baixar-titulo": {
       "patch": {
         "tags": [
-          "Produção"
+          "Sicredi"
         ],
         "summary": "Instrucao Sustar Protesto Baixar",
         "requestBody": {
@@ -2165,13 +1210,18 @@
               "application/json": {}
             }
           }
-        }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
       }
     },
     "/cobranca/boleto/v1/boletos/600009999/sustar-protesto-manter-titulo": {
       "patch": {
         "tags": [
-          "Produção"
+          "Sicredi"
         ],
         "summary": "Instrucao Sustar Protesto Manter",
         "requestBody": {
@@ -2240,13 +1290,18 @@
               "application/json": {}
             }
           }
-        }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
       }
     },
     "/cobranca/boleto/v1/boletos/600009999/cancelar-protesto-automatico": {
       "patch": {
         "tags": [
-          "Produção"
+          "Sicredi"
         ],
         "summary": "Instrucao Cancelar Protesto Automatico",
         "requestBody": {
@@ -2315,13 +1370,18 @@
               "application/json": {}
             }
           }
-        }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
       }
     },
     "/cobranca/boleto/v1/boletos/600009999/negativacao": {
       "patch": {
         "tags": [
-          "Produção"
+          "Sicredi"
         ],
         "summary": "Instrucao Negativacao",
         "requestBody": {
@@ -2390,13 +1450,18 @@
               "application/json": {}
             }
           }
-        }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
       }
     },
     "/cobranca/boleto/v1/boletos/600009115/sustar-negativacao-baixar-titulo": {
       "patch": {
         "tags": [
-          "Produção"
+          "Sicredi"
         ],
         "summary": "Instrucao Sustar Negativacao Baixar",
         "requestBody": {
@@ -2465,13 +1530,18 @@
               "application/json": {}
             }
           }
-        }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
       }
     },
     "/cobranca/boleto/v1/boletos/600009115/sustar-negativacao-manter-titulo": {
       "patch": {
         "tags": [
-          "Produção"
+          "Sicredi"
         ],
         "summary": "Instrucao Sustar Negativacao Manter",
         "requestBody": {
@@ -2540,13 +1610,18 @@
               "application/json": {}
             }
           }
-        }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
       }
     },
     "/cobranca/boleto/v2/boletos": {
       "get": {
         "tags": [
-          "Produção"
+          "Sicredi"
         ],
         "summary": "Consultar Boleto por Nosso Número (v2 - com data-movimento)",
         "description": "Consulta um boleto pelo Nosso Número com suporte a data de movimento contábil.",
@@ -2626,13 +1701,18 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
       }
     },
     "/cobranca/boleto/v1/boletos/cadastrados": {
       "get": {
         "tags": [
-          "Produção"
+          "Sicredi"
         ],
         "summary": "Consulta idEmpresa/SeuNum",
         "parameters": [
@@ -2707,15 +1787,20 @@
               "application/json": {}
             }
           }
-        }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
       }
     },
     "/cobranca/boleto/v1/boletos/liquidados/dia": {
       "get": {
         "tags": [
-          "Produção"
+          "Sicredi"
         ],
-        "summary": "Consulta Liquidados",
+        "summary": "Consultar Boletos Liquidados por Dia",
         "parameters": [
           {
             "name": "cooperativa",
@@ -2769,7 +1854,8 @@
             "in": "query",
             "schema": {
               "type": "string"
-            }
+            },
+            "required": true
           },
           {
             "name": "dia",
@@ -2777,23 +1863,60 @@
             "schema": {
               "type": "string"
             },
-            "example": "25/01/2024"
+            "example": "25/01/2024",
+            "required": true
+          },
+          {
+            "name": "pagina",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            }
           }
         ],
         "responses": {
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {}
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConsultarLiquidadosDiaResponseEntity"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseEntity"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseEntity"
+                }
+              }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
       }
     },
     "/cobranca/v1/cobranca-financeiro/movimentacoes": {
       "get": {
         "tags": [
-          "Produção"
+          "Sicredi"
         ],
         "summary": "Francesinha - PRD",
         "parameters": [
@@ -2876,7 +1999,12 @@
               "application/json": {}
             }
           }
-        }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
       }
     }
   },
@@ -3497,6 +2625,50 @@
         },
         "required": [
           "error"
+        ]
+      },
+      "ConsultarLiquidadosDiaResponseEntity": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "cooperativa": {
+                  "type": "string"
+                },
+                "codigoBeneficiario": {
+                  "type": "string"
+                },
+                "nossoNumero": {
+                  "type": "string"
+                },
+                "seuNumero": {
+                  "type": "string"
+                },
+                "dataPagamento": {
+                  "type": "string"
+                },
+                "valor": {
+                  "type": "number"
+                },
+                "valorLiquidado": {
+                  "type": "number"
+                },
+                "tipoLiquidacao": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "hasNext": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "items",
+          "hasNext"
         ]
       }
     },
