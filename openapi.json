@@ -1,0 +1,3512 @@
+﻿{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API Cobranca - Collection Geral",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://api-parceiro.sicredi.com.br"
+    },
+    {
+      "url": "https://api-parceiro.sicredi.com.br/sb"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Sandbox"
+    },
+    {
+      "name": "Produção"
+    }
+  ],
+  "security": [
+    {
+      "bearer": []
+    }
+  ],
+  "paths": {
+    "/auth/openapi/token": {
+      "post": {
+        "tags": [
+          "SicrediAuth"
+        ],
+        "summary": "Autenticação",
+        "description": "Gera um token JWT para autenticação nas demais operações. O access_token expira em 300s. Use o refresh_token para renovar.",
+        "operationId": "autenticacao",
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/AutenticacaoFormEntity"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/x-www-form-urlencoded"
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "xxxxxxxx-xxxx-xxxe-xxxx-xxxxxxxxxx"
+          },
+          {
+            "name": "context",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "COBRANCA"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutenticacaoResponseEntity"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Parâmetros inválidos",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutenticacaoErrorResponseEntity"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Token ausente, inválido ou expirado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutenticacaoErrorResponseEntity"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/cobranca/boleto/v1/boletos": {
+      "post": {
+        "tags": [
+          "Sicredi"
+        ],
+        "summary": "Cadastrar Boleto",
+        "description": "Cadastra um boleto (Tradicional, Híbrido ou com Split de crédito).",
+        "operationId": "cadastrarBoleto",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CadastrarBoletoFormEntity"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJBU0ZSSm1VMTBwaWRpbzFlQ254cXUzV2VwaDFjX2xJWFJDVXk5ZGpTZ0drIn0.eyJleHAiOjE2NjE0NzAyNzQsImlhdCI6MTY2MTQ2NjY3NCwianRpIjoiMjE0OTQ5N2QtMjVlMC00OGEwLTk4M2QtMWNkZjU5YzI0ZTgwIiwiaXNzIjoiaHR0cHM6Ly9hdXRoLW9wZW5hcGkudWF0LnNpY3JlZGkuY2xvdWQvcmVhbG1zL29wZW5hcGkiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiZjo4YjU0NzRmZi0xZThlLTRiNzYtOWYyYS1iNmExYTIxMzgzZjY6Q09CUkFOQ0E6MTIzNDU2Nzg5IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoib3BlbmFwaS1ndy1zZW5zZWRpYSIsInNlc3Npb25fc3RhdGUiOiJiMmJlYmEwMy1mM2ZhLTQyOGEtOWQzOC0wNTU4MWYzZTAxMTkiLCJhY3IiOiIxIiwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbImRlZmF1bHQtcm9sZXMtb3BlbmFwaSIsIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6ImNvYnJhbmNhIGVtYWlsIHByb2ZpbGUiLCJzaWQiOiJiMmJlYmEwMy1mM2ZhLTQyOGEtOWQzOC0wNTU4MWYzZTAxMTkiLCJvcGVuYXBpX3VzZXJuYW1lIjoiMTIzNDU2Nzg5Iiwib3BlbmFwaV9jb250ZXh0IjoiQ09CUkFOQ0EiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInByZWZlcnJlZF91c2VybmFtZSI6IjEyMzQ1Njc4OSJ9.F_bL7t38jOem_rB3FSto1vDh0QAxYTPLiacEpRW5sVZiBhWNfgHaxd7pOxtEZLag9oA9U-ejCXXr8yEeW6bVIivet4ArdVsOIjJGUPaDnC3UhUOeLHB9pxWj_s6oGkweCCJWl2Yria-Y_YBkWFOn7pJnkb2QyOEvscYGkPRY_pM5BGh7U__OhWTZzH6VrhQ8TFuFx7e4e0XlD4Mwehi0iBDRsaSnb42cnoYBlSx_bSwvSjoPFriuyHyMoybukHJN_vP7C8TYGDv8QOZXI4FfkIXGHuq3U5u2yaMawU_pfNOTBIDBLUL0O_s168FjX4V_rn-qVM5SmYHrFiuBs-0C-g"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          },
+          {
+            "name": "cooperativa",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "6789"
+          },
+          {
+            "name": "posto",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "03"
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "xxxxxxxx-xxxx-xxxe-xxxx-xxxxxxxxxx"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CadastrarBoletoResponseEntity"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Sicredi"
+        ],
+        "summary": "Consultar Boleto por Nosso Número (v1)",
+        "description": "Consulta um boleto pelo Nosso Número.",
+        "operationId": "consultarBoleto",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJBU0ZSSm1VMTBwaWRpbzFlQ254cXUzV2VwaDFjX2xJWFJDVXk5ZGpTZ0drIn0.eyJleHAiOjE3MjExODY2NjEsImlhdCI6MTcyMTE4MzA2MSwianRpIjoiZWU5YTFhNTYtNjgyZi00OTMwLThjZTYtMGM4Y2IzOGY1MzlmIiwiaXNzIjoiaHR0cHM6Ly9hdXRoLW9wZW5hcGkudWF0LnNpY3JlZGkuY2xvdWQvcmVhbG1zL29wZW5hcGkiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiZjo4YjU0NzRmZi0xZThlLTRiNzYtOWYyYS1iNmExYTIxMzgzZjY6Q09CUkFOQ0E6MTIzNDU2Nzg5IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoib3BlbmFwaS1ndy1zZW5zZWRpYSIsInNlc3Npb25fc3RhdGUiOiJmNDIxNzBlYi1kMmZiLTRhMjUtYjE2NC01OGI1NmQ2YWI2MzQiLCJhY3IiOiIxIiwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbImRlZmF1bHQtcm9sZXMtb3BlbmFwaSIsIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6ImNvYnJhbmNhIGVtYWlsIHByb2ZpbGUiLCJzaWQiOiJmNDIxNzBlYi1kMmZiLTRhMjUtYjE2NC01OGI1NmQ2YWI2MzQiLCJvcGVuYXBpX3VzZXJuYW1lIjoiMTIzNDU2Nzg5Iiwib3BlbmFwaV9jb250ZXh0IjoiQ09CUkFOQ0EiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInByZWZlcnJlZF91c2VybmFtZSI6IjEyMzQ1Njc4OSJ9.Kp28ppDQfgRy4MjG4hx1dBZC9Blb957c9nnXUocjlboohDnYKB5ffmkuyj-oaRkAbe8qHeeNFnoa6z-IoSd-LzunXaOReNaqgH3FjD76XJyJpWnDCEa4OSypn2jiowYcIDqfEYJOpZGm2n9Qu2bkXCFTjiKAzDn_55DWg2LMDGrXwujc0gB22_wDAsZlMK-5D17HLX1b2eW0LDSGcC1ynhZQX3WYRzkIVLAbBYB5KkurkFGSgx_EJcW6j15yqN-yHJUFmMV41PlkSjbuy1kC2qGEnkzhzYHcKkquVi7C8CJgNR3xcA5zego4DNDe2LiIVOy1QwMlLmp18XryZkXnjw"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/x-www-form-urlencoded"
+          },
+          {
+            "name": "cooperativa",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "6789"
+          },
+          {
+            "name": "posto",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "03"
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "xxxxxxxx-xxxx-xxxe-xxxx-xxxxxxxxxx"
+          },
+          {
+            "name": "codigoBeneficiario",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "12345"
+          },
+          {
+            "name": "nossoNumero",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "211001293"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConsultarBoletoResponseEntity"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cobranca/boleto/v1/boletos/{nossoNumero}/baixa": {
+      "patch": {
+        "tags": [
+          "Sicredi"
+        ],
+        "summary": "Instrução Baixa",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {}
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "nossoNumero",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJBU0ZSSm1VMTBwaWRpbzFlQ254cXUzV2VwaDFjX2xJWFJDVXk5ZGpTZ0drIn0.eyJleHAiOjE3MjA1Mzc2OTksImlhdCI6MTcyMDUzNDA5OSwianRpIjoiMTJjMDFhY2UtYzM0ZS00NWI2LTliMjgtODhiZGRhNDA4NDc1IiwiaXNzIjoiaHR0cHM6Ly9hdXRoLW9wZW5hcGkudWF0LnNpY3JlZGkuY2xvdWQvcmVhbG1zL29wZW5hcGkiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiZjo4YjU0NzRmZi0xZThlLTRiNzYtOWYyYS1iNmExYTIxMzgzZjY6Q09CUkFOQ0E6MTIzNDU2Nzg5IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoib3BlbmFwaS1ndy1zZW5zZWRpYSIsInNlc3Npb25fc3RhdGUiOiI4ZGI5NDQzOS00NjM5LTQ5YTYtYTc3OS1hYjU5YTY0NDhlOGIiLCJhY3IiOiIxIiwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbImRlZmF1bHQtcm9sZXMtb3BlbmFwaSIsIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6ImNvYnJhbmNhIGVtYWlsIHByb2ZpbGUiLCJzaWQiOiI4ZGI5NDQzOS00NjM5LTQ5YTYtYTc3OS1hYjU5YTY0NDhlOGIiLCJvcGVuYXBpX3VzZXJuYW1lIjoiMTIzNDU2Nzg5Iiwib3BlbmFwaV9jb250ZXh0IjoiQ09CUkFOQ0EiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInByZWZlcnJlZF91c2VybmFtZSI6IjEyMzQ1Njc4OSJ9.EDCypmbGnyFrQhNqQbIsHUeQ0DDZ_dTJ1OYKnJSlDSVlkgFgPMQTnN373Kq5QfTWCMiOX4z4muk_05Y96Sk1mVO2deAopsgEnG0yZSrygnGg3JnvLrM_iWdzGjoagkc7yaRrbhgIKdnmdAPUNvyWK8sjzTZtTFU1_OPPLZXhAlH5E59d1jkLoAQZJ6wTA7Aocdh6dZBX2QJ5fiaS5NOlGcNdKHvPmSZ2iac7lc5XdirgXtedlDGi2VmWnUO9VKDxTKKDhJdYNB2QG8GMvTmWtj5v3cFXFIPFzS4D8SB5gQQwKF0_bPjwIvsJXk24zUMIbXqVLVBHWoNKmEw1YNBwiA"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          },
+          {
+            "name": "codigoBeneficiario",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "12345"
+          },
+          {
+            "name": "cooperativa",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "6789"
+          },
+          {
+            "name": "posto",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "03"
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "xxxxxxxx-xxxx-xxxe-xxxx-xxxxxxxxxx"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/sb/cobranca/boleto/v1/boletos/211001292/juros": {
+      "patch": {
+        "tags": [
+          "Sandbox"
+        ],
+        "summary": "Instrução Altera Juros",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "valorAbatimento": "10.0"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJBU0ZSSm1VMTBwaWRpbzFlQ254cXUzV2VwaDFjX2xJWFJDVXk5ZGpTZ0drIn0.eyJleHAiOjE3MjEyMzI1MDIsImlhdCI6MTcyMTIyODkwMiwianRpIjoiNTU4NTRjODItZGQ1MC00ZjgzLWFlNjAtY2E4NzA1NjcxNmE0IiwiaXNzIjoiaHR0cHM6Ly9hdXRoLW9wZW5hcGkudWF0LnNpY3JlZGkuY2xvdWQvcmVhbG1zL29wZW5hcGkiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiZjo4YjU0NzRmZi0xZThlLTRiNzYtOWYyYS1iNmExYTIxMzgzZjY6Q09CUkFOQ0E6MTIzNDU2Nzg5IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoib3BlbmFwaS1ndy1zZW5zZWRpYSIsInNlc3Npb25fc3RhdGUiOiI1OGMyZDE0NS02MWFkLTQ3YmUtODQ4ZC02OGUzNGQwYjdjNmUiLCJhY3IiOiIxIiwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbImRlZmF1bHQtcm9sZXMtb3BlbmFwaSIsIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6ImNvYnJhbmNhIGVtYWlsIHByb2ZpbGUiLCJzaWQiOiI1OGMyZDE0NS02MWFkLTQ3YmUtODQ4ZC02OGUzNGQwYjdjNmUiLCJvcGVuYXBpX3VzZXJuYW1lIjoiMTIzNDU2Nzg5Iiwib3BlbmFwaV9jb250ZXh0IjoiQ09CUkFOQ0EiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInByZWZlcnJlZF91c2VybmFtZSI6IjEyMzQ1Njc4OSJ9.Wlno63OL-QrVhXWooy1c5X-pBVRMBQ8JS128jlu5nP7W8BSztbH-ED0srYPCR-THxyxpq6RGtU40W_xo63maOEZOlzcOeCdA2TfIgWa_IWIj1ML0cir-zE5V-TjV4fQ-DrmzOWSnzzmHjUUUPpI6Y0AabY4ElMSS2nUCKhv5_c2O_76VPc6KJ5TlufQWk0osxRd0TAAERY9OB-YazdiRqIsO9P1AIQKKFKz4htgFIA7xe3ClS9H4v0B0Qmszcm7KhH7VDS4q-P_NzcH8FhPXNgoKLaB_2eh9TUx1_5LnWkenoq_wXZd864qsLZct4In9px6fogb6vfZGSXvZ7c-ORg"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          },
+          {
+            "name": "codigoBeneficiario",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "12345"
+          },
+          {
+            "name": "cooperativa",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "6789"
+          },
+          {
+            "name": "posto",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "03"
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "xxxxxxxx-xxxx-xxxe-xxxx-xxxxxxxxxx"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/sb/cobranca/boleto/v1/boletos/211001292/seu-numero": {
+      "patch": {
+        "tags": [
+          "Sandbox"
+        ],
+        "summary": "Instrução Altera Seu Numero",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "seuNumero": "0123456789"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJBU0ZSSm1VMTBwaWRpbzFlQ254cXUzV2VwaDFjX2xJWFJDVXk5ZGpTZ0drIn0.eyJleHAiOjE3MjEyMzI1MDIsImlhdCI6MTcyMTIyODkwMiwianRpIjoiNTU4NTRjODItZGQ1MC00ZjgzLWFlNjAtY2E4NzA1NjcxNmE0IiwiaXNzIjoiaHR0cHM6Ly9hdXRoLW9wZW5hcGkudWF0LnNpY3JlZGkuY2xvdWQvcmVhbG1zL29wZW5hcGkiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiZjo4YjU0NzRmZi0xZThlLTRiNzYtOWYyYS1iNmExYTIxMzgzZjY6Q09CUkFOQ0E6MTIzNDU2Nzg5IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoib3BlbmFwaS1ndy1zZW5zZWRpYSIsInNlc3Npb25fc3RhdGUiOiI1OGMyZDE0NS02MWFkLTQ3YmUtODQ4ZC02OGUzNGQwYjdjNmUiLCJhY3IiOiIxIiwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbImRlZmF1bHQtcm9sZXMtb3BlbmFwaSIsIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6ImNvYnJhbmNhIGVtYWlsIHByb2ZpbGUiLCJzaWQiOiI1OGMyZDE0NS02MWFkLTQ3YmUtODQ4ZC02OGUzNGQwYjdjNmUiLCJvcGVuYXBpX3VzZXJuYW1lIjoiMTIzNDU2Nzg5Iiwib3BlbmFwaV9jb250ZXh0IjoiQ09CUkFOQ0EiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInByZWZlcnJlZF91c2VybmFtZSI6IjEyMzQ1Njc4OSJ9.Wlno63OL-QrVhXWooy1c5X-pBVRMBQ8JS128jlu5nP7W8BSztbH-ED0srYPCR-THxyxpq6RGtU40W_xo63maOEZOlzcOeCdA2TfIgWa_IWIj1ML0cir-zE5V-TjV4fQ-DrmzOWSnzzmHjUUUPpI6Y0AabY4ElMSS2nUCKhv5_c2O_76VPc6KJ5TlufQWk0osxRd0TAAERY9OB-YazdiRqIsO9P1AIQKKFKz4htgFIA7xe3ClS9H4v0B0Qmszcm7KhH7VDS4q-P_NzcH8FhPXNgoKLaB_2eh9TUx1_5LnWkenoq_wXZd864qsLZct4In9px6fogb6vfZGSXvZ7c-ORg"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          },
+          {
+            "name": "codigoBeneficiario",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "12345"
+          },
+          {
+            "name": "cooperativa",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "6789"
+          },
+          {
+            "name": "posto",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "03"
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "xxxxxxxx-xxxx-xxxe-xxxx-xxxxxxxxxx"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/sb/cobranca/boleto/v1/boletos/211001292/desconto": {
+      "patch": {
+        "tags": [
+          "Sandbox"
+        ],
+        "summary": "Instrução Altera Desconto",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "valorDesconto1": 3.25,
+                  "valorDesconto2": 2.25,
+                  "valorDesconto3": 1.25
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJBU0ZSSm1VMTBwaWRpbzFlQ254cXUzV2VwaDFjX2xJWFJDVXk5ZGpTZ0drIn0.eyJleHAiOjE3MjEyMzI1MDIsImlhdCI6MTcyMTIyODkwMiwianRpIjoiNTU4NTRjODItZGQ1MC00ZjgzLWFlNjAtY2E4NzA1NjcxNmE0IiwiaXNzIjoiaHR0cHM6Ly9hdXRoLW9wZW5hcGkudWF0LnNpY3JlZGkuY2xvdWQvcmVhbG1zL29wZW5hcGkiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiZjo4YjU0NzRmZi0xZThlLTRiNzYtOWYyYS1iNmExYTIxMzgzZjY6Q09CUkFOQ0E6MTIzNDU2Nzg5IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoib3BlbmFwaS1ndy1zZW5zZWRpYSIsInNlc3Npb25fc3RhdGUiOiI1OGMyZDE0NS02MWFkLTQ3YmUtODQ4ZC02OGUzNGQwYjdjNmUiLCJhY3IiOiIxIiwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbImRlZmF1bHQtcm9sZXMtb3BlbmFwaSIsIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6ImNvYnJhbmNhIGVtYWlsIHByb2ZpbGUiLCJzaWQiOiI1OGMyZDE0NS02MWFkLTQ3YmUtODQ4ZC02OGUzNGQwYjdjNmUiLCJvcGVuYXBpX3VzZXJuYW1lIjoiMTIzNDU2Nzg5Iiwib3BlbmFwaV9jb250ZXh0IjoiQ09CUkFOQ0EiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInByZWZlcnJlZF91c2VybmFtZSI6IjEyMzQ1Njc4OSJ9.Wlno63OL-QrVhXWooy1c5X-pBVRMBQ8JS128jlu5nP7W8BSztbH-ED0srYPCR-THxyxpq6RGtU40W_xo63maOEZOlzcOeCdA2TfIgWa_IWIj1ML0cir-zE5V-TjV4fQ-DrmzOWSnzzmHjUUUPpI6Y0AabY4ElMSS2nUCKhv5_c2O_76VPc6KJ5TlufQWk0osxRd0TAAERY9OB-YazdiRqIsO9P1AIQKKFKz4htgFIA7xe3ClS9H4v0B0Qmszcm7KhH7VDS4q-P_NzcH8FhPXNgoKLaB_2eh9TUx1_5LnWkenoq_wXZd864qsLZct4In9px6fogb6vfZGSXvZ7c-ORg"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          },
+          {
+            "name": "codigoBeneficiario",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "12345"
+          },
+          {
+            "name": "cooperativa",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "6789"
+          },
+          {
+            "name": "posto",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "03"
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "xxxxxxxx-xxxx-xxxe-xxxx-xxxxxxxxxx"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/sb/cobranca/boleto/v1/boletos/211001292/protesto": {
+      "patch": {
+        "tags": [
+          "Sandbox"
+        ],
+        "summary": "Instrução Protesto",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {}
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJBU0ZSSm1VMTBwaWRpbzFlQ254cXUzV2VwaDFjX2xJWFJDVXk5ZGpTZ0drIn0.eyJleHAiOjE3MjEyMzI1MDIsImlhdCI6MTcyMTIyODkwMiwianRpIjoiNTU4NTRjODItZGQ1MC00ZjgzLWFlNjAtY2E4NzA1NjcxNmE0IiwiaXNzIjoiaHR0cHM6Ly9hdXRoLW9wZW5hcGkudWF0LnNpY3JlZGkuY2xvdWQvcmVhbG1zL29wZW5hcGkiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiZjo4YjU0NzRmZi0xZThlLTRiNzYtOWYyYS1iNmExYTIxMzgzZjY6Q09CUkFOQ0E6MTIzNDU2Nzg5IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoib3BlbmFwaS1ndy1zZW5zZWRpYSIsInNlc3Npb25fc3RhdGUiOiI1OGMyZDE0NS02MWFkLTQ3YmUtODQ4ZC02OGUzNGQwYjdjNmUiLCJhY3IiOiIxIiwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbImRlZmF1bHQtcm9sZXMtb3BlbmFwaSIsIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6ImNvYnJhbmNhIGVtYWlsIHByb2ZpbGUiLCJzaWQiOiI1OGMyZDE0NS02MWFkLTQ3YmUtODQ4ZC02OGUzNGQwYjdjNmUiLCJvcGVuYXBpX3VzZXJuYW1lIjoiMTIzNDU2Nzg5Iiwib3BlbmFwaV9jb250ZXh0IjoiQ09CUkFOQ0EiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInByZWZlcnJlZF91c2VybmFtZSI6IjEyMzQ1Njc4OSJ9.Wlno63OL-QrVhXWooy1c5X-pBVRMBQ8JS128jlu5nP7W8BSztbH-ED0srYPCR-THxyxpq6RGtU40W_xo63maOEZOlzcOeCdA2TfIgWa_IWIj1ML0cir-zE5V-TjV4fQ-DrmzOWSnzzmHjUUUPpI6Y0AabY4ElMSS2nUCKhv5_c2O_76VPc6KJ5TlufQWk0osxRd0TAAERY9OB-YazdiRqIsO9P1AIQKKFKz4htgFIA7xe3ClS9H4v0B0Qmszcm7KhH7VDS4q-P_NzcH8FhPXNgoKLaB_2eh9TUx1_5LnWkenoq_wXZd864qsLZct4In9px6fogb6vfZGSXvZ7c-ORg"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          },
+          {
+            "name": "codigoBeneficiario",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "12345"
+          },
+          {
+            "name": "cooperativa",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "6789"
+          },
+          {
+            "name": "posto",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "03"
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "xxxxxxxx-xxxx-xxxe-xxxx-xxxxxxxxxx"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/sb/cobranca/boleto/v1/boletos/211001292/sustar-protesto-baixar-titulo": {
+      "patch": {
+        "tags": [
+          "Sandbox"
+        ],
+        "summary": "Instrução Sustar Protesto Baixar",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": ""
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJBU0ZSSm1VMTBwaWRpbzFlQ254cXUzV2VwaDFjX2xJWFJDVXk5ZGpTZ0drIn0.eyJleHAiOjE3MjA1Mzc2OTksImlhdCI6MTcyMDUzNDA5OSwianRpIjoiMTJjMDFhY2UtYzM0ZS00NWI2LTliMjgtODhiZGRhNDA4NDc1IiwiaXNzIjoiaHR0cHM6Ly9hdXRoLW9wZW5hcGkudWF0LnNpY3JlZGkuY2xvdWQvcmVhbG1zL29wZW5hcGkiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiZjo4YjU0NzRmZi0xZThlLTRiNzYtOWYyYS1iNmExYTIxMzgzZjY6Q09CUkFOQ0E6MTIzNDU2Nzg5IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoib3BlbmFwaS1ndy1zZW5zZWRpYSIsInNlc3Npb25fc3RhdGUiOiI4ZGI5NDQzOS00NjM5LTQ5YTYtYTc3OS1hYjU5YTY0NDhlOGIiLCJhY3IiOiIxIiwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbImRlZmF1bHQtcm9sZXMtb3BlbmFwaSIsIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6ImNvYnJhbmNhIGVtYWlsIHByb2ZpbGUiLCJzaWQiOiI4ZGI5NDQzOS00NjM5LTQ5YTYtYTc3OS1hYjU5YTY0NDhlOGIiLCJvcGVuYXBpX3VzZXJuYW1lIjoiMTIzNDU2Nzg5Iiwib3BlbmFwaV9jb250ZXh0IjoiQ09CUkFOQ0EiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInByZWZlcnJlZF91c2VybmFtZSI6IjEyMzQ1Njc4OSJ9.EDCypmbGnyFrQhNqQbIsHUeQ0DDZ_dTJ1OYKnJSlDSVlkgFgPMQTnN373Kq5QfTWCMiOX4z4muk_05Y96Sk1mVO2deAopsgEnG0yZSrygnGg3JnvLrM_iWdzGjoagkc7yaRrbhgIKdnmdAPUNvyWK8sjzTZtTFU1_OPPLZXhAlH5E59d1jkLoAQZJ6wTA7Aocdh6dZBX2QJ5fiaS5NOlGcNdKHvPmSZ2iac7lc5XdirgXtedlDGi2VmWnUO9VKDxTKKDhJdYNB2QG8GMvTmWtj5v3cFXFIPFzS4D8SB5gQQwKF0_bPjwIvsJXk24zUMIbXqVLVBHWoNKmEw1YNBwiA"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          },
+          {
+            "name": "codigoBeneficiario",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "12345"
+          },
+          {
+            "name": "cooperativa",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "6789"
+          },
+          {
+            "name": "posto",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "03"
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "xxxxxxxx-xxxx-xxxe-xxxx-xxxxxxxxxx"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/sb/cobranca/boleto/v1/boletos/211001292/sustar-protesto-manter-titulo": {
+      "patch": {
+        "tags": [
+          "Sandbox"
+        ],
+        "summary": "Instrução Sustar Protesto Manter",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": ""
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJBU0ZSSm1VMTBwaWRpbzFlQ254cXUzV2VwaDFjX2xJWFJDVXk5ZGpTZ0drIn0.eyJleHAiOjE3MjA1Mzc2OTksImlhdCI6MTcyMDUzNDA5OSwianRpIjoiMTJjMDFhY2UtYzM0ZS00NWI2LTliMjgtODhiZGRhNDA4NDc1IiwiaXNzIjoiaHR0cHM6Ly9hdXRoLW9wZW5hcGkudWF0LnNpY3JlZGkuY2xvdWQvcmVhbG1zL29wZW5hcGkiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiZjo4YjU0NzRmZi0xZThlLTRiNzYtOWYyYS1iNmExYTIxMzgzZjY6Q09CUkFOQ0E6MTIzNDU2Nzg5IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoib3BlbmFwaS1ndy1zZW5zZWRpYSIsInNlc3Npb25fc3RhdGUiOiI4ZGI5NDQzOS00NjM5LTQ5YTYtYTc3OS1hYjU5YTY0NDhlOGIiLCJhY3IiOiIxIiwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbImRlZmF1bHQtcm9sZXMtb3BlbmFwaSIsIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6ImNvYnJhbmNhIGVtYWlsIHByb2ZpbGUiLCJzaWQiOiI4ZGI5NDQzOS00NjM5LTQ5YTYtYTc3OS1hYjU5YTY0NDhlOGIiLCJvcGVuYXBpX3VzZXJuYW1lIjoiMTIzNDU2Nzg5Iiwib3BlbmFwaV9jb250ZXh0IjoiQ09CUkFOQ0EiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInByZWZlcnJlZF91c2VybmFtZSI6IjEyMzQ1Njc4OSJ9.EDCypmbGnyFrQhNqQbIsHUeQ0DDZ_dTJ1OYKnJSlDSVlkgFgPMQTnN373Kq5QfTWCMiOX4z4muk_05Y96Sk1mVO2deAopsgEnG0yZSrygnGg3JnvLrM_iWdzGjoagkc7yaRrbhgIKdnmdAPUNvyWK8sjzTZtTFU1_OPPLZXhAlH5E59d1jkLoAQZJ6wTA7Aocdh6dZBX2QJ5fiaS5NOlGcNdKHvPmSZ2iac7lc5XdirgXtedlDGi2VmWnUO9VKDxTKKDhJdYNB2QG8GMvTmWtj5v3cFXFIPFzS4D8SB5gQQwKF0_bPjwIvsJXk24zUMIbXqVLVBHWoNKmEw1YNBwiA"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          },
+          {
+            "name": "codigoBeneficiario",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "12345"
+          },
+          {
+            "name": "cooperativa",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "6789"
+          },
+          {
+            "name": "posto",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "03"
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "xxxxxxxx-xxxx-xxxe-xxxx-xxxxxxxxxx"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/sb/cobranca/boleto/v1/boletos/211001292/cancelar-protesto-automatico": {
+      "patch": {
+        "tags": [
+          "Sandbox"
+        ],
+        "summary": "Instrução Cancelar Protesto Automatico",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {}
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJBU0ZSSm1VMTBwaWRpbzFlQ254cXUzV2VwaDFjX2xJWFJDVXk5ZGpTZ0drIn0.eyJleHAiOjE3MjA1Mzc2OTksImlhdCI6MTcyMDUzNDA5OSwianRpIjoiMTJjMDFhY2UtYzM0ZS00NWI2LTliMjgtODhiZGRhNDA4NDc1IiwiaXNzIjoiaHR0cHM6Ly9hdXRoLW9wZW5hcGkudWF0LnNpY3JlZGkuY2xvdWQvcmVhbG1zL29wZW5hcGkiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiZjo4YjU0NzRmZi0xZThlLTRiNzYtOWYyYS1iNmExYTIxMzgzZjY6Q09CUkFOQ0E6MTIzNDU2Nzg5IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoib3BlbmFwaS1ndy1zZW5zZWRpYSIsInNlc3Npb25fc3RhdGUiOiI4ZGI5NDQzOS00NjM5LTQ5YTYtYTc3OS1hYjU5YTY0NDhlOGIiLCJhY3IiOiIxIiwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbImRlZmF1bHQtcm9sZXMtb3BlbmFwaSIsIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6ImNvYnJhbmNhIGVtYWlsIHByb2ZpbGUiLCJzaWQiOiI4ZGI5NDQzOS00NjM5LTQ5YTYtYTc3OS1hYjU5YTY0NDhlOGIiLCJvcGVuYXBpX3VzZXJuYW1lIjoiMTIzNDU2Nzg5Iiwib3BlbmFwaV9jb250ZXh0IjoiQ09CUkFOQ0EiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInByZWZlcnJlZF91c2VybmFtZSI6IjEyMzQ1Njc4OSJ9.EDCypmbGnyFrQhNqQbIsHUeQ0DDZ_dTJ1OYKnJSlDSVlkgFgPMQTnN373Kq5QfTWCMiOX4z4muk_05Y96Sk1mVO2deAopsgEnG0yZSrygnGg3JnvLrM_iWdzGjoagkc7yaRrbhgIKdnmdAPUNvyWK8sjzTZtTFU1_OPPLZXhAlH5E59d1jkLoAQZJ6wTA7Aocdh6dZBX2QJ5fiaS5NOlGcNdKHvPmSZ2iac7lc5XdirgXtedlDGi2VmWnUO9VKDxTKKDhJdYNB2QG8GMvTmWtj5v3cFXFIPFzS4D8SB5gQQwKF0_bPjwIvsJXk24zUMIbXqVLVBHWoNKmEw1YNBwiA"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          },
+          {
+            "name": "codigoBeneficiario",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "12345"
+          },
+          {
+            "name": "cooperativa",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "6789"
+          },
+          {
+            "name": "posto",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "03"
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "xxxxxxxx-xxxx-xxxe-xxxx-xxxxxxxxxx"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/sb/cobranca/boleto/v1/boletos/211001292/conceder-abatimento": {
+      "patch": {
+        "tags": [
+          "Sandbox"
+        ],
+        "summary": "Instrução Conceder Abatimento",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "valorAbatimento": "10.0"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJBU0ZSSm1VMTBwaWRpbzFlQ254cXUzV2VwaDFjX2xJWFJDVXk5ZGpTZ0drIn0.eyJleHAiOjE3MjA1Mzc2OTksImlhdCI6MTcyMDUzNDA5OSwianRpIjoiMTJjMDFhY2UtYzM0ZS00NWI2LTliMjgtODhiZGRhNDA4NDc1IiwiaXNzIjoiaHR0cHM6Ly9hdXRoLW9wZW5hcGkudWF0LnNpY3JlZGkuY2xvdWQvcmVhbG1zL29wZW5hcGkiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiZjo4YjU0NzRmZi0xZThlLTRiNzYtOWYyYS1iNmExYTIxMzgzZjY6Q09CUkFOQ0E6MTIzNDU2Nzg5IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoib3BlbmFwaS1ndy1zZW5zZWRpYSIsInNlc3Npb25fc3RhdGUiOiI4ZGI5NDQzOS00NjM5LTQ5YTYtYTc3OS1hYjU5YTY0NDhlOGIiLCJhY3IiOiIxIiwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbImRlZmF1bHQtcm9sZXMtb3BlbmFwaSIsIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6ImNvYnJhbmNhIGVtYWlsIHByb2ZpbGUiLCJzaWQiOiI4ZGI5NDQzOS00NjM5LTQ5YTYtYTc3OS1hYjU5YTY0NDhlOGIiLCJvcGVuYXBpX3VzZXJuYW1lIjoiMTIzNDU2Nzg5Iiwib3BlbmFwaV9jb250ZXh0IjoiQ09CUkFOQ0EiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInByZWZlcnJlZF91c2VybmFtZSI6IjEyMzQ1Njc4OSJ9.EDCypmbGnyFrQhNqQbIsHUeQ0DDZ_dTJ1OYKnJSlDSVlkgFgPMQTnN373Kq5QfTWCMiOX4z4muk_05Y96Sk1mVO2deAopsgEnG0yZSrygnGg3JnvLrM_iWdzGjoagkc7yaRrbhgIKdnmdAPUNvyWK8sjzTZtTFU1_OPPLZXhAlH5E59d1jkLoAQZJ6wTA7Aocdh6dZBX2QJ5fiaS5NOlGcNdKHvPmSZ2iac7lc5XdirgXtedlDGi2VmWnUO9VKDxTKKDhJdYNB2QG8GMvTmWtj5v3cFXFIPFzS4D8SB5gQQwKF0_bPjwIvsJXk24zUMIbXqVLVBHWoNKmEw1YNBwiA"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          },
+          {
+            "name": "codigoBeneficiario",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "12345"
+          },
+          {
+            "name": "cooperativa",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "6789"
+          },
+          {
+            "name": "posto",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "03"
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "xxxxxxxx-xxxx-xxxe-xxxx-xxxxxxxxxx"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/sb/cobranca/boleto/v1/boletos/211001292/cancelar-abatimento": {
+      "patch": {
+        "tags": [
+          "Sandbox"
+        ],
+        "summary": "Instrução Cancelar Abatimento",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "valorAbatimento": "10.0"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJBU0ZSSm1VMTBwaWRpbzFlQ254cXUzV2VwaDFjX2xJWFJDVXk5ZGpTZ0drIn0.eyJleHAiOjE3MjA1Mzc2OTksImlhdCI6MTcyMDUzNDA5OSwianRpIjoiMTJjMDFhY2UtYzM0ZS00NWI2LTliMjgtODhiZGRhNDA4NDc1IiwiaXNzIjoiaHR0cHM6Ly9hdXRoLW9wZW5hcGkudWF0LnNpY3JlZGkuY2xvdWQvcmVhbG1zL29wZW5hcGkiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiZjo4YjU0NzRmZi0xZThlLTRiNzYtOWYyYS1iNmExYTIxMzgzZjY6Q09CUkFOQ0E6MTIzNDU2Nzg5IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoib3BlbmFwaS1ndy1zZW5zZWRpYSIsInNlc3Npb25fc3RhdGUiOiI4ZGI5NDQzOS00NjM5LTQ5YTYtYTc3OS1hYjU5YTY0NDhlOGIiLCJhY3IiOiIxIiwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbImRlZmF1bHQtcm9sZXMtb3BlbmFwaSIsIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6ImNvYnJhbmNhIGVtYWlsIHByb2ZpbGUiLCJzaWQiOiI4ZGI5NDQzOS00NjM5LTQ5YTYtYTc3OS1hYjU5YTY0NDhlOGIiLCJvcGVuYXBpX3VzZXJuYW1lIjoiMTIzNDU2Nzg5Iiwib3BlbmFwaV9jb250ZXh0IjoiQ09CUkFOQ0EiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInByZWZlcnJlZF91c2VybmFtZSI6IjEyMzQ1Njc4OSJ9.EDCypmbGnyFrQhNqQbIsHUeQ0DDZ_dTJ1OYKnJSlDSVlkgFgPMQTnN373Kq5QfTWCMiOX4z4muk_05Y96Sk1mVO2deAopsgEnG0yZSrygnGg3JnvLrM_iWdzGjoagkc7yaRrbhgIKdnmdAPUNvyWK8sjzTZtTFU1_OPPLZXhAlH5E59d1jkLoAQZJ6wTA7Aocdh6dZBX2QJ5fiaS5NOlGcNdKHvPmSZ2iac7lc5XdirgXtedlDGi2VmWnUO9VKDxTKKDhJdYNB2QG8GMvTmWtj5v3cFXFIPFzS4D8SB5gQQwKF0_bPjwIvsJXk24zUMIbXqVLVBHWoNKmEw1YNBwiA"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          },
+          {
+            "name": "codigoBeneficiario",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "12345"
+          },
+          {
+            "name": "cooperativa",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "6789"
+          },
+          {
+            "name": "posto",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "03"
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "xxxxxxxx-xxxx-xxxe-xxxx-xxxxxxxxxx"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/sb/cobranca/boleto/v1/boletos/211001292/negativacao": {
+      "patch": {
+        "tags": [
+          "Sandbox"
+        ],
+        "summary": "Instrução Negativação",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {}
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJBU0ZSSm1VMTBwaWRpbzFlQ254cXUzV2VwaDFjX2xJWFJDVXk5ZGpTZ0drIn0.eyJleHAiOjE3MjA1Mzc2OTksImlhdCI6MTcyMDUzNDA5OSwianRpIjoiMTJjMDFhY2UtYzM0ZS00NWI2LTliMjgtODhiZGRhNDA4NDc1IiwiaXNzIjoiaHR0cHM6Ly9hdXRoLW9wZW5hcGkudWF0LnNpY3JlZGkuY2xvdWQvcmVhbG1zL29wZW5hcGkiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiZjo4YjU0NzRmZi0xZThlLTRiNzYtOWYyYS1iNmExYTIxMzgzZjY6Q09CUkFOQ0E6MTIzNDU2Nzg5IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoib3BlbmFwaS1ndy1zZW5zZWRpYSIsInNlc3Npb25fc3RhdGUiOiI4ZGI5NDQzOS00NjM5LTQ5YTYtYTc3OS1hYjU5YTY0NDhlOGIiLCJhY3IiOiIxIiwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbImRlZmF1bHQtcm9sZXMtb3BlbmFwaSIsIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6ImNvYnJhbmNhIGVtYWlsIHByb2ZpbGUiLCJzaWQiOiI4ZGI5NDQzOS00NjM5LTQ5YTYtYTc3OS1hYjU5YTY0NDhlOGIiLCJvcGVuYXBpX3VzZXJuYW1lIjoiMTIzNDU2Nzg5Iiwib3BlbmFwaV9jb250ZXh0IjoiQ09CUkFOQ0EiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInByZWZlcnJlZF91c2VybmFtZSI6IjEyMzQ1Njc4OSJ9.EDCypmbGnyFrQhNqQbIsHUeQ0DDZ_dTJ1OYKnJSlDSVlkgFgPMQTnN373Kq5QfTWCMiOX4z4muk_05Y96Sk1mVO2deAopsgEnG0yZSrygnGg3JnvLrM_iWdzGjoagkc7yaRrbhgIKdnmdAPUNvyWK8sjzTZtTFU1_OPPLZXhAlH5E59d1jkLoAQZJ6wTA7Aocdh6dZBX2QJ5fiaS5NOlGcNdKHvPmSZ2iac7lc5XdirgXtedlDGi2VmWnUO9VKDxTKKDhJdYNB2QG8GMvTmWtj5v3cFXFIPFzS4D8SB5gQQwKF0_bPjwIvsJXk24zUMIbXqVLVBHWoNKmEw1YNBwiA"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          },
+          {
+            "name": "codigoBeneficiario",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "12345"
+          },
+          {
+            "name": "cooperativa",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "6789"
+          },
+          {
+            "name": "posto",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "03"
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "xxxxxxxx-xxxx-xxxe-xxxx-xxxxxxxxxx"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/sb/cobranca/boleto/v1/boletos/211001292/sustar-negativacao-baixar-titulo": {
+      "patch": {
+        "tags": [
+          "Sandbox"
+        ],
+        "summary": "Instrução Excluir Negativação Baixar",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": ""
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJBU0ZSSm1VMTBwaWRpbzFlQ254cXUzV2VwaDFjX2xJWFJDVXk5ZGpTZ0drIn0.eyJleHAiOjE3MjA1Mzc2OTksImlhdCI6MTcyMDUzNDA5OSwianRpIjoiMTJjMDFhY2UtYzM0ZS00NWI2LTliMjgtODhiZGRhNDA4NDc1IiwiaXNzIjoiaHR0cHM6Ly9hdXRoLW9wZW5hcGkudWF0LnNpY3JlZGkuY2xvdWQvcmVhbG1zL29wZW5hcGkiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiZjo4YjU0NzRmZi0xZThlLTRiNzYtOWYyYS1iNmExYTIxMzgzZjY6Q09CUkFOQ0E6MTIzNDU2Nzg5IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoib3BlbmFwaS1ndy1zZW5zZWRpYSIsInNlc3Npb25fc3RhdGUiOiI4ZGI5NDQzOS00NjM5LTQ5YTYtYTc3OS1hYjU5YTY0NDhlOGIiLCJhY3IiOiIxIiwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbImRlZmF1bHQtcm9sZXMtb3BlbmFwaSIsIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6ImNvYnJhbmNhIGVtYWlsIHByb2ZpbGUiLCJzaWQiOiI4ZGI5NDQzOS00NjM5LTQ5YTYtYTc3OS1hYjU5YTY0NDhlOGIiLCJvcGVuYXBpX3VzZXJuYW1lIjoiMTIzNDU2Nzg5Iiwib3BlbmFwaV9jb250ZXh0IjoiQ09CUkFOQ0EiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInByZWZlcnJlZF91c2VybmFtZSI6IjEyMzQ1Njc4OSJ9.EDCypmbGnyFrQhNqQbIsHUeQ0DDZ_dTJ1OYKnJSlDSVlkgFgPMQTnN373Kq5QfTWCMiOX4z4muk_05Y96Sk1mVO2deAopsgEnG0yZSrygnGg3JnvLrM_iWdzGjoagkc7yaRrbhgIKdnmdAPUNvyWK8sjzTZtTFU1_OPPLZXhAlH5E59d1jkLoAQZJ6wTA7Aocdh6dZBX2QJ5fiaS5NOlGcNdKHvPmSZ2iac7lc5XdirgXtedlDGi2VmWnUO9VKDxTKKDhJdYNB2QG8GMvTmWtj5v3cFXFIPFzS4D8SB5gQQwKF0_bPjwIvsJXk24zUMIbXqVLVBHWoNKmEw1YNBwiA"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          },
+          {
+            "name": "codigoBeneficiario",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "12345"
+          },
+          {
+            "name": "cooperativa",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "6789"
+          },
+          {
+            "name": "posto",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "03"
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "xxxxxxxx-xxxx-xxxe-xxxx-xxxxxxxxxx"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/sb/cobranca/boleto/v1/boletos/pdf": {
+      "get": {
+        "tags": [
+          "Sandbox"
+        ],
+        "summary": "Imprimir Boleto (PDF)",
+        "description": "Gera o PDF do boleto para impressão ou reimpressão (2ª via).",
+        "operationId": "imprimirBoleto",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Bearer eyJ0eXAiOiJKV1QiLCJraWQiOiIzMWVkMTk1My02YzM1LTRjMWMtOGJmMy1jNTkwZGI4NzE4ZTciLCJhbGciOiJSUzI1NiJ9.eyJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJ0eXAiOiJCZWFyZXIiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiIxMjM0NTY3ODkiLCJzaWQiOiI5MmYyYzQwNy1kOTFkLTQ2YjMtOTk4YS1kZDdmYWMxNjUwZTAiLCJhY3IiOiIxIiwib3BlbmFwaV91c2VybmFtZSI6IjEyMzQ1Njc4OSIsIm9wZW5hcGlfY29udGV4dCI6IkNPQlJBTkNBIiwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbImRlZmF1bHQtcm9sZXMtb3BlbmFwaSIsIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iXX0sImF6cCI6Im9wZW5hcGktZ3ctc2Vuc2VkaWEiLCJzY29wZSI6ImNvYnJhbmNhIGVtYWlsIHByb2ZpbGUiLCJzZXNzaW9uX3N0YXRlIjoiOTJmMmM0MDctZDkxZC00NmIzLTk5OGEtZGQ3ZmFjMTY1MGUwIiwianRpIjoiOTJmMmM0MDctZDkxZC00NmIzLTk5OGEtZGQ3ZmFjMTY1MGUwIiwic3ViIjoiZjoxMTUzM2NmOS03Mzk0LTRjMzYtOWRhYS01ZTk4ZjRkN2FkYzM6Q09CUkFOQ0E6MTIzNDU2Nzg5IiwiaXNzIjoiaHR0cHM6Ly9hdXRoLW9wZW5hcGkudWF0LnNpY3JlZGkuY2xvdWQvcmVhbG1zL29wZW5hcGkiLCJpYXQiOjE3MDM3NjgxNjAsImV4cCI6MTcwMzc3MTc2MCwiYXVkIjoiYWNjb3VudCJ9.f6mjyci9fMEW_Zgif1bUR_cZVYTwEyLuHzD6ydnI63RysyswYGdFxoLoFlJCku-42E3vskCinjQpJ2GJoCFqxLL_idi00NNybEfR2E9EInVDwPFMSCIjK8z20692epFeFy18jXfqn1MFJ6KKEojnBvBCWZVhcXQFcjo0kXxZ_JOXpmLU4-YYe1XseGQ0D1YIZAn5F2iAMSMzWKvgragPnjadIIs95z3YPeWCNqBlU4pnhv8qSLv0hgPUaZgZLc9Nt5xJdDA-JwCVdlgaNk57ADG13LTgMYDT95CjgpCphY8Kl91-hc9tZeMlcR-_9SuLAfXYE0dUXiBi6rYzZK5-nw"
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "xxxxxxxx-xxxx-xxxe-xxxx-xxxxxxxxxx"
+          },
+          {
+            "name": "posto",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "03"
+          },
+          {
+            "name": "cooperativa",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "6789"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          },
+          {
+            "name": "linhaDigitavel",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "74891121150039736789903123451001187340000000050"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/pdf": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/sb/cobranca/boleto/v1/boletos/liquidados/dia": {
+      "get": {
+        "tags": [
+          "Sandbox"
+        ],
+        "summary": "Consulta LIQUIDADOS DIA",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Bearer eyJ0eXAiOiJKV1QiLCJraWQiOiIzMWVkMTk1My02YzM1LTRjMWMtOGJmMy1jNTkwZGI4NzE4ZTciLCJhbGciOiJSUzI1NiJ9.eyJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJ0eXAiOiJCZWFyZXIiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiIxMjM0NTY3ODkiLCJzaWQiOiI3NDk1ZmI2NC0xNTI2LTQ0NzYtYWExNC0yZjdmODQyZDZmZmQiLCJhY3IiOiIxIiwib3BlbmFwaV91c2VybmFtZSI6IjEyMzQ1Njc4OSIsIm9wZW5hcGlfY29udGV4dCI6IkNPQlJBTkNBIiwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbImRlZmF1bHQtcm9sZXMtb3BlbmFwaSIsIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iXX0sImF6cCI6Im9wZW5hcGktZ3ctc2Vuc2VkaWEiLCJzY29wZSI6ImNvYnJhbmNhIGVtYWlsIHByb2ZpbGUiLCJzZXNzaW9uX3N0YXRlIjoiNzQ5NWZiNjQtMTUyNi00NDc2LWFhMTQtMmY3Zjg0MmQ2ZmZkIiwianRpIjoiNzQ5NWZiNjQtMTUyNi00NDc2LWFhMTQtMmY3Zjg0MmQ2ZmZkIiwic3ViIjoiZjpjMDA5ZjQyYi05ZWI1LTQ4NTEtODFkNS00NWRmZGQwNTFmMWQ6Q09CUkFOQ0E6MTIzNDU2Nzg5IiwiaXNzIjoiaHR0cHM6Ly9hdXRoLW9wZW5hcGkudWF0LnNpY3JlZGkuY2xvdWQvcmVhbG1zL29wZW5hcGkiLCJpYXQiOjE3MDgzNTA0MTcsImV4cCI6MTcwODM1NDAxNywiYXVkIjoiYWNjb3VudCJ9.d2ATChVYe8d_eretu3U2SpSqudnpltKbLUdW3a1BXifx1HdG9u6Xq54I9VUfLyx2WakJ3XatpD4ordnuZ78Fa2hW3nOBapO14tMZ9WHfxz91EJExU7NW2x-tu8fGJkjiDLkyNeeR8tCGP60Jai-YeJFGeI2ewNZCRqTl0Dg4BwF5pOy3nFLlKC3clHPQPVEvpnkVrAJTy13mpOa6d6XYJbvLrvu5vZ_Y39DP9Ug1suXdiMbiNqaq2vdmAFeRcSKkxncMCGO2fbu7zzQRi_TmYJriI8xwZAU9ux0cYDQdpK9E3LWE0TewW3hsQssrzxvum_3oQh2bINd54xTp-ILgeA"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/x-www-form-urlencoded"
+          },
+          {
+            "name": "cooperativa",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "6789"
+          },
+          {
+            "name": "posto",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "03"
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "xxxxxxxx-xxxx-xxxe-xxxx-xxxxxxxxxx"
+          },
+          {
+            "name": "codigoBeneficiario",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "12345"
+          },
+          {
+            "name": "dia",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "10/07/2023"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/sb/cobranca/v1/cobranca-financeiro/movimentacoes": {
+      "get": {
+        "tags": [
+          "Sandbox"
+        ],
+        "summary": "Francesinha - Sandbox",
+        "parameters": [
+          {
+            "name": "accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "*/*"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJBU0ZSSm1VMTBwaWRpbzFlQ254cXUzV2VwaDFjX2xJWFJDVXk5ZGpTZ0drIn0.eyJleHAiOjE3MTg2MzYzNDYsImlhdCI6MTcxODYzMjc0NiwianRpIjoiMzA3Yzc4NTAtNTkzYi00MzkwLTk4MGYtMjBiNTk5Mzk3ZmI1IiwiaXNzIjoiaHR0cHM6Ly9hdXRoLW9wZW5hcGkudWF0LnNpY3JlZGkuY2xvdWQvcmVhbG1zL29wZW5hcGkiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiZjo4YjU0NzRmZi0xZThlLTRiNzYtOWYyYS1iNmExYTIxMzgzZjY6Q09CUkFOQ0E6MTIzNDU2Nzg5IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoib3BlbmFwaS1ndy1zZW5zZWRpYSIsInNlc3Npb25fc3RhdGUiOiJlZTI3Zjk3Ni02OTVlLTQzZDgtOGQwZS1kYjlmYzRlNjk3N2YiLCJhY3IiOiIxIiwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbImRlZmF1bHQtcm9sZXMtb3BlbmFwaSIsIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6ImNvYnJhbmNhIGVtYWlsIHByb2ZpbGUiLCJzaWQiOiJlZTI3Zjk3Ni02OTVlLTQzZDgtOGQwZS1kYjlmYzRlNjk3N2YiLCJvcGVuYXBpX3VzZXJuYW1lIjoiMTIzNDU2Nzg5Iiwib3BlbmFwaV9jb250ZXh0IjoiQ09CUkFOQ0EiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInByZWZlcnJlZF91c2VybmFtZSI6IjEyMzQ1Njc4OSJ9.ElXta6AZE6dMEOEKgijgBpLfpDQ2AxnFat3nyYJFyj7-Tcvdnni_Tb-fD0hZhwheP-YwU5KefROgxVM_yzNYaoZWTJ1roQT4wjrWfcIdgGoa9kC__yx0SAbqJypWzNaMrn1D3WzT6uTrb5XP9_9otHcyXv5SRCDstr9BpMFs8mGFf5iZNYHCZTJlHbkXKn5ac4nXDS9ZucDpbOys16eJ4qEWqDnmJxIQFwzcG7ZNtYA52tfWzNYSO57zDXKOfhKCno_1mhDjuR1Nu-PiDWBEXRkw7JJSkgMnctaFecEjBi09IZ2KSp0KEc88bLq7_OeAm-9SvfVrBnVAe7epqW9Szg"
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "xxxxxxxx-xxxx-xxxe-xxxx-xxxxxxxxxx"
+          },
+          {
+            "name": "cooperativa",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "6789"
+          },
+          {
+            "name": "codigoBeneficiario",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "12345"
+          },
+          {
+            "name": "posto",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "03"
+          },
+          {
+            "name": "dataLancamento",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "07-09-2023"
+          },
+          {
+            "name": "pagina",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            },
+            "example": 0
+          },
+          {
+            "name": "tipoMovimento",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "CREDITO"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/cobranca/boleto/v1/boletos/pdf": {
+      "get": {
+        "tags": [
+          "Produção"
+        ],
+        "summary": "Impressão",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Bearer eyJhb4tIW6ijuF09YBCKsngc7OeOaGBsFk_fA"
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "linhaDigitavel",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "748911600912345592596400000000003"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseEntity"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cobranca/boleto/v1/boletos/600008054/desconto": {
+      "patch": {
+        "tags": [
+          "Produção"
+        ],
+        "summary": "Instrução Desconto",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "valorDesconto1": 0.18
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Bearer 4OvvpKKNEbET92S64wEA"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          },
+          {
+            "name": "codigoBeneficiario",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "12345"
+          },
+          {
+            "name": "cooperativa",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "1134"
+          },
+          {
+            "name": "posto",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "12"
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/cobranca/boleto/v1/boletos/600007945/desconto": {
+      "patch": {
+        "tags": [
+          "Produção"
+        ],
+        "summary": "Instrução Altera Juros",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "valorOuPercentual": "10.0"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJxMlRFLXliYWxnNjIxSmRCt0-sKVI1SAvg"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          },
+          {
+            "name": "codigoBeneficiario",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "12345"
+          },
+          {
+            "name": "cooperativa",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "1234"
+          },
+          {
+            "name": "posto",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "12"
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/cobranca/boleto/v1/boletos/600007945/seu-numero": {
+      "patch": {
+        "tags": [
+          "Produção"
+        ],
+        "summary": "Instrução Altera Seu Numero",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "seuNumero": "0123456789"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Bearer eyJhbGci"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          },
+          {
+            "name": "codigoBeneficiario",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "12345"
+          },
+          {
+            "name": "cooperativa",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "1234"
+          },
+          {
+            "name": "posto",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "12"
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/cobranca/boleto/v1/boletos/241000727/data-vencimento": {
+      "patch": {
+        "tags": [
+          "Produção"
+        ],
+        "summary": "Instrucao - Altera Vencimento",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "dataVencimento": "2024-09-30"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJxMlRFLXliYWxnNjIxSmRCMU9IX0w2Sms5QllxODJtNkFSZ0NGaDZtQnZBIn0.eyJleHAiOjE3MTYxMjEzNjEsImlhdCI6MTcxNjEyMTA2MSwianRpIjoiMjg3NTVjMTQtNzVlNi00NjhhLWE2YTktZTZmZDlmNDdkM2Y2IiwiaXNzIjoiaHR0cHM6Ly9hdXRoLW9wZW5hcGkucHJkLnNpY3JlZGkuY2xvdWQvcmVhbG1zL29wZW5hcGkiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiZjozMWY3ODE1MS1jMzdmLTQzOWYtYTIwOS02NjFjYTQ3MzkzYTE6Q09CUkFOQ0E6MDA0MTQwMTE2IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoib3BlbmFwaS1ndy1zZW5zZWRpYSIsInNlc3Npb25fc3RhdGUiOiIzYjBhZDhhZS1lNmIyLTRjNWQtYjQxMi01YzEzZWVlMDVjMzciLCJhY3IiOiIxIiwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbImRlZmF1bHQtcm9sZXMtb3BlbmFwaSIsIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6ImNvYnJhbmNhIHByb2ZpbGUgZW1haWwiLCJzaWQiOiIzYjBhZDhhZS1lNmIyLTRjNWQtYjQxMi01YzEzZWVlMDVjMzciLCJvcGVuYXBpX3VzZXJuYW1lIjoiMDA0MTQwMTE2Iiwib3BlbmFwaV9jb250ZXh0IjoiQ09CUkFOQ0EiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInByZWZlcnJlZF91c2VybmFtZSI6IjAwNDE0MDExNiJ9.XFFW96ob9Z59ujIkVqEopGq-pMKenSH4FL82QswiL6qWr9RhMm062q9WpjvzfEnNrkWCcZaak2P6VMQPLKRcYTUoTMxFWdVMtb0_9FsbObqR0ucCTqm7oDqT9RlEpn0MsxNQq2QIKuXqO8REEe7dTQM64Fs86bb8ClOoEEHJOpg-_zv9r6f8Cmxi8Nzfx7Sm3nF4FL9zuoj1RRIjdp9VyoDNk93Xe85Xdb2-msjQTtJVEsnZ14YF7Mxqr_YDY2JN0mkmE8_QrGbGZOk0OXJuZw1ZJM11GKB5dcshFYxGNks55atx-ChMmk-Y5JhANJHURQTj6hl8HWODMr6TyH1Wzg"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          },
+          {
+            "name": "codigoBeneficiario",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "12345"
+          },
+          {
+            "name": "cooperativa",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "1234"
+          },
+          {
+            "name": "posto",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "12"
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/cobranca/boleto/v1/boletos/600007970/data-vencimento": {
+      "patch": {
+        "tags": [
+          "Produção"
+        ],
+        "summary": "Instrucao - Altera Data Desconto",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "data1": "2021-09-23"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Bearer eyJhbGciy06CQ"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          },
+          {
+            "name": "codigoBeneficiario",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "12345"
+          },
+          {
+            "name": "cooperativa",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "1234"
+          },
+          {
+            "name": "posto",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "12"
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/cobranca/boleto/v1/boletos/600009999/conceder-abatimento": {
+      "patch": {
+        "tags": [
+          "Produção"
+        ],
+        "summary": "Instrução Conceder Abatimento",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "valorAbatimento": "0.02"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Bearer eyJhbGcn-hVedKW6tCFNeAcQpTjnNE9bQyXsO_trQ"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          },
+          {
+            "name": "codigoBeneficiario",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "12345"
+          },
+          {
+            "name": "cooperativa",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "12345"
+          },
+          {
+            "name": "posto",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "12"
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/cobranca/boleto/v1/boletos/600009199/cancelar-abatimento": {
+      "patch": {
+        "tags": [
+          "Produção"
+        ],
+        "summary": "Instrucao Cancelar Abatimento",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {}
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "codigoBeneficiario",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "12345"
+          },
+          {
+            "name": "cooperativa",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "1234"
+          },
+          {
+            "name": "posto",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "12"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Bearer ey7ibQyXsO_trQ"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/cobranca/boleto/v1/boletos/600009999/protesto": {
+      "patch": {
+        "tags": [
+          "Produção"
+        ],
+        "summary": "Instrucao Protesto",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {}
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "codigoBeneficiario",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "12345"
+          },
+          {
+            "name": "cooperativa",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "1234"
+          },
+          {
+            "name": "posto",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "12"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Bearer eyJhbGciOPw"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/cobranca/boleto/v1/boletos/60000999/sustar-protesto-baixar-titulo": {
+      "patch": {
+        "tags": [
+          "Produção"
+        ],
+        "summary": "Instrucao Sustar Protesto Baixar",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {}
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "codigoBeneficiario",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "12345"
+          },
+          {
+            "name": "cooperativa",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "1234"
+          },
+          {
+            "name": "posto",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "12"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Bearer ey"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/cobranca/boleto/v1/boletos/600009999/sustar-protesto-manter-titulo": {
+      "patch": {
+        "tags": [
+          "Produção"
+        ],
+        "summary": "Instrucao Sustar Protesto Manter",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {}
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "codigoBeneficiario",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "12345"
+          },
+          {
+            "name": "cooperativa",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "1234"
+          },
+          {
+            "name": "posto",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "12"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Bearer eyJhbGc"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/cobranca/boleto/v1/boletos/600009999/cancelar-protesto-automatico": {
+      "patch": {
+        "tags": [
+          "Produção"
+        ],
+        "summary": "Instrucao Cancelar Protesto Automatico",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {}
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "codigoBeneficiario",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "12345"
+          },
+          {
+            "name": "cooperativa",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "1234"
+          },
+          {
+            "name": "posto",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "12"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Bearer eyJhbgEFnWM"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/cobranca/boleto/v1/boletos/600009999/negativacao": {
+      "patch": {
+        "tags": [
+          "Produção"
+        ],
+        "summary": "Instrucao Negativacao",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {}
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "codigoBeneficiario",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "12345"
+          },
+          {
+            "name": "cooperativa",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "1234"
+          },
+          {
+            "name": "posto",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "12"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Bearer eyJh"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/cobranca/boleto/v1/boletos/600009115/sustar-negativacao-baixar-titulo": {
+      "patch": {
+        "tags": [
+          "Produção"
+        ],
+        "summary": "Instrucao Sustar Negativacao Baixar",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {}
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "codigoBeneficiario",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "12345"
+          },
+          {
+            "name": "cooperativa",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "1234"
+          },
+          {
+            "name": "posto",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "12"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Bearer eyJ"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/cobranca/boleto/v1/boletos/600009115/sustar-negativacao-manter-titulo": {
+      "patch": {
+        "tags": [
+          "Produção"
+        ],
+        "summary": "Instrucao Sustar Negativacao Manter",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {}
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "codigoBeneficiario",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "12345"
+          },
+          {
+            "name": "cooperativa",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "1234"
+          },
+          {
+            "name": "posto",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "12"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Bearer eyJhbQ"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/cobranca/boleto/v2/boletos": {
+      "get": {
+        "tags": [
+          "Produção"
+        ],
+        "summary": "Consultar Boleto por Nosso Número (v2 - com data-movimento)",
+        "description": "Consulta um boleto pelo Nosso Número com suporte a data de movimento contábil.",
+        "operationId": "consultarBoletoDataMovimento",
+        "parameters": [
+          {
+            "name": "cooperativa",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "1234"
+          },
+          {
+            "name": "posto",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "12"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Bearer eyJhpOA"
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/x-www-form-urlencoded"
+          },
+          {
+            "name": "data-movimento",
+            "in": "header",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "codigoBeneficiario",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "12345"
+          },
+          {
+            "name": "nossoNumero",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "211009999"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConsultarBoletoResponseEntity"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cobranca/boleto/v1/boletos/cadastrados": {
+      "get": {
+        "tags": [
+          "Produção"
+        ],
+        "summary": "Consulta idEmpresa/SeuNum",
+        "parameters": [
+          {
+            "name": "cooperativa",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "1234"
+          },
+          {
+            "name": "posto",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "12"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Bearer eyJhbc9"
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          },
+          {
+            "name": "idTituloEmpresa",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "XYZ123456789ABC"
+          },
+          {
+            "name": "seuNumero",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "teste"
+          },
+          {
+            "name": "codigoBeneficiario",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "12345"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/cobranca/boleto/v1/boletos/liquidados/dia": {
+      "get": {
+        "tags": [
+          "Produção"
+        ],
+        "summary": "Consulta Liquidados",
+        "parameters": [
+          {
+            "name": "cooperativa",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "1234"
+          },
+          {
+            "name": "posto",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "12"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Bearer eyJh4g"
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/x-www-form-urlencoded"
+          },
+          {
+            "name": "codigoBeneficiario",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "12345"
+          },
+          {
+            "name": "cpfCnpjBeneficiarioFinal",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "dia",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "25/01/2024"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/cobranca/v1/cobranca-financeiro/movimentacoes": {
+      "get": {
+        "tags": [
+          "Produção"
+        ],
+        "summary": "Francesinha - PRD",
+        "parameters": [
+          {
+            "name": "accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "*/*"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Bearer eyJhJR-g"
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "codigoBeneficiario",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "12345"
+          },
+          {
+            "name": "cooperativa",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "1234"
+          },
+          {
+            "name": "dataLancamento",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "07/08/2023"
+          },
+          {
+            "name": "pagina",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            },
+            "example": 0
+          },
+          {
+            "name": "posto",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "12"
+          },
+          {
+            "name": "tipoMovimento",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "AMBOS"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AutenticacaoFormEntity": {
+        "type": "object",
+        "properties": {
+          "grant_type": {
+            "type": "string",
+            "enum": [
+              "password",
+              "refresh_token"
+            ]
+          },
+          "username": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "refresh_token": {
+            "type": "string"
+          },
+          "scope": {
+            "type": "string",
+            "enum": [
+              "cobranca"
+            ]
+          }
+        },
+        "required": [
+          "grant_type"
+        ]
+      },
+      "AutenticacaoResponseEntity": {
+        "type": "object",
+        "properties": {
+          "access_token": {
+            "type": "string"
+          },
+          "token_type": {
+            "type": "string"
+          },
+          "refresh_token": {
+            "type": "string"
+          },
+          "expires_in": {
+            "type": "number"
+          },
+          "refresh_expires_in": {
+            "type": "number"
+          },
+          "scope": {
+            "type": "string"
+          },
+          "session_state": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "access_token",
+          "token_type",
+          "refresh_token",
+          "expires_in",
+          "refresh_expires_in",
+          "scope",
+          "session_state"
+        ]
+      },
+      "AutenticacaoErrorResponseEntity": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "error_description": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error"
+        ]
+      },
+      "CadastrarBoletoFormEntity": {
+        "type": "object",
+        "properties": {
+          "beneficiarioFinal": {
+            "type": "object",
+            "properties": {
+              "cep": {
+                "type": "number"
+              },
+              "cidade": {
+                "type": "string"
+              },
+              "documento": {
+                "type": "string"
+              },
+              "logradouro": {
+                "type": "string"
+              },
+              "nome": {
+                "type": "string"
+              },
+              "numeroEndereco": {
+                "type": "number"
+              },
+              "tipoPessoa": {
+                "type": "string",
+                "enum": [
+                  "PESSOA_JURIDICA",
+                  "PESSOA_FISICA"
+                ]
+              },
+              "uf": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "tipoPessoa",
+              "documento",
+              "nome"
+            ]
+          },
+          "codigoBeneficiario": {
+            "type": "string"
+          },
+          "dataVencimento": {
+            "type": "string"
+          },
+          "especieDocumento": {
+            "type": "string",
+            "enum": [
+              "DUPLICATA_MERCANTIL_INDICACAO",
+              "DUPLICATA_RURAL",
+              "NOTA_PROMISSORIA",
+              "NOTA_PROMISSORIA_RURAL",
+              "NOTA_SEGUROS",
+              "RECIBO",
+              "LETRA_CAMBIO",
+              "NOTA_DEBITO",
+              "DUPLICATA_SERVICO_INDICACAO",
+              "OUTROS",
+              "BOLETO_PROPOSTA",
+              "CARTAO_CREDITO",
+              "BOLETO_DEPOSITO"
+            ]
+          },
+          "pagador": {
+            "type": "object",
+            "properties": {
+              "cep": {
+                "type": "string"
+              },
+              "cidade": {
+                "type": "string"
+              },
+              "documento": {
+                "type": "string"
+              },
+              "nome": {
+                "type": "string"
+              },
+              "tipoPessoa": {
+                "type": "string",
+                "enum": [
+                  "PESSOA_JURIDICA",
+                  "PESSOA_FISICA"
+                ]
+              },
+              "endereco": {
+                "type": "string"
+              },
+              "uf": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "tipoPessoa",
+              "documento",
+              "nome"
+            ]
+          },
+          "tipoCobranca": {
+            "type": "string",
+            "enum": [
+              "NORMAL",
+              "HIBRIDO"
+            ]
+          },
+          "seuNumero": {
+            "type": "string"
+          },
+          "valor": {
+            "type": "number"
+          },
+          "informativos": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "mensagens": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "tipoDesconto": {
+            "type": "string",
+            "enum": [
+              "A - VALOR",
+              "B - PERCENTUAL"
+            ]
+          },
+          "tipoJuros": {
+            "type": "string",
+            "enum": [
+              "A - VALOR",
+              "B - PERCENTUAL"
+            ]
+          },
+          "tipoJurosPercentual": {
+            "type": "string",
+            "enum": [
+              "DIARIO",
+              "MENSAL"
+            ]
+          },
+          "juros": {
+            "type": "number"
+          },
+          "dataInicioJuros": {
+            "type": "string"
+          },
+          "tipoMulta": {
+            "type": "string",
+            "enum": [
+              "DIARIO",
+              "MENSAL"
+            ]
+          },
+          "multa": {
+            "type": "number"
+          },
+          "dataInicioMulta": {
+            "type": "string"
+          },
+          "diasProtestoAuto": {
+            "type": "integer"
+          },
+          "diasNegativacaoAuto": {
+            "type": "integer"
+          },
+          "validadeAposVencimento": {
+            "type": "integer"
+          },
+          "valorDesconto1": {
+            "type": "number"
+          },
+          "dataDesconto1": {
+            "type": "string"
+          },
+          "valorDesconto2": {
+            "type": "number"
+          },
+          "dataDesconto2": {
+            "type": "string"
+          },
+          "valorDesconto3": {
+            "type": "number"
+          },
+          "dataDesconto3": {
+            "type": "string"
+          },
+          "descontoAntecipado": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "tipoCobranca",
+          "codigoBeneficiario",
+          "pagador",
+          "especieDocumento",
+          "seuNumero",
+          "dataVencimento",
+          "valor"
+        ]
+      },
+      "CadastrarBoletoResponseEntity": {
+        "type": "object",
+        "properties": {
+          "txid": {
+            "type": "string"
+          },
+          "qrCode": {
+            "type": "string"
+          },
+          "linhaDigitavel": {
+            "type": "string"
+          },
+          "codigoBarras": {
+            "type": "string"
+          },
+          "cooperativa": {
+            "type": "string"
+          },
+          "posto": {
+            "type": "string"
+          },
+          "nossoNumero": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "txid",
+          "qrCode",
+          "linhaDigitavel",
+          "codigoBarras",
+          "cooperativa",
+          "posto",
+          "nossoNumero"
+        ]
+      },
+      "ConsultarBoletoResponseEntity": {
+        "type": "object",
+        "properties": {
+          "linhaDigitavel": {
+            "type": "string"
+          },
+          "codigoBarras": {
+            "type": "string"
+          },
+          "carteira": {
+            "type": "string",
+            "enum": [
+              "A - SIMPLES",
+              "B - CAUCIONADA",
+              "C - DESCONTADA",
+              "D - VINCULADA"
+            ]
+          },
+          "nossoNumero": {
+            "type": "string"
+          },
+          "seuNumero": {
+            "type": "string"
+          },
+          "pagador": {
+            "type": "object",
+            "properties": {
+              "tipoPessoa": {
+                "type": "string",
+                "enum": [
+                  "PESSOA_JURIDICA",
+                  "PESSOA_FISICA"
+                ]
+              },
+              "documento": {
+                "type": "string"
+              },
+              "nome": {
+                "type": "string"
+              },
+              "endereco": {
+                "type": "string"
+              },
+              "cidade": {
+                "type": "string"
+              },
+              "uf": {
+                "type": "string"
+              },
+              "cep": {
+                "type": "string"
+              },
+              "telefone": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "tipoPessoa",
+              "documento",
+              "nome"
+            ]
+          },
+          "beneficiarioFinal": {
+            "type": "object",
+            "properties": {
+              "tipoPessoa": {
+                "type": "string",
+                "enum": [
+                  "PESSOA_JURIDICA",
+                  "PESSOA_FISICA"
+                ]
+              },
+              "documento": {
+                "type": "string"
+              },
+              "nome": {
+                "type": "string"
+              },
+              "logradouro": {
+                "type": "string"
+              },
+              "numeroEndereco": {
+                "type": "string"
+              },
+              "cidade": {
+                "type": "string"
+              },
+              "uf": {
+                "type": "string"
+              },
+              "cep": {
+                "type": "string"
+              },
+              "telefone": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "tipoPessoa",
+              "documento",
+              "nome"
+            ]
+          },
+          "dataEmissao": {
+            "type": "string"
+          },
+          "dataVencimento": {
+            "type": "string"
+          },
+          "valorNominal": {
+            "type": "number"
+          },
+          "situacao": {
+            "type": "string",
+            "enum": [
+              "EM CARTEIRA",
+              "EM CARTEIRA PIX",
+              "VENCIDO",
+              "LIQUIDADO",
+              "LIQUIDADO CARTORIO",
+              "LIQUIDADO REDE",
+              "LIQUIDADO COMPE",
+              "LIQUIDADO PIX",
+              "LIQUIDADO CHEQUE",
+              "BAIXADO POR SOLICITACAO",
+              "PROTESTADO",
+              "EM CARTORIO",
+              "NEGATIVADO",
+              "AGUARDANDO ENTRADA EM CARTORIO",
+              "AGUARDANDO SUSTACAO DE CARTORIO",
+              "REJEITADO"
+            ]
+          },
+          "txId": {
+            "type": "string"
+          },
+          "codigoQrCode": {
+            "type": "string"
+          },
+          "tipoMulta": {
+            "type": "string",
+            "enum": [
+              "VALOR",
+              "PERCENTUAL"
+            ]
+          },
+          "multa": {
+            "type": "number"
+          },
+          "dataInicioMulta": {
+            "type": "string"
+          },
+          "abatimento": {
+            "type": "number"
+          },
+          "tipoJuros": {
+            "type": "string",
+            "enum": [
+              "A - VALOR",
+              "B - PERCENTUAL"
+            ]
+          },
+          "tipoJurosPercentual": {
+            "type": "string",
+            "enum": [
+              "DIARIO",
+              "MENSAL"
+            ]
+          },
+          "juros": {
+            "type": "number"
+          },
+          "dataInicioJuros": {
+            "type": "string"
+          },
+          "diasProtesto": {
+            "type": "number"
+          },
+          "idTituloEmpresa": {
+            "type": "string"
+          },
+          "validadeAPosVencimento": {
+            "type": "number"
+          },
+          "diasNegativacao": {
+            "type": "number"
+          },
+          "tipoDesconto": {
+            "type": "string",
+            "enum": [
+              "A - VALOR",
+              "B - PERCENTUAL"
+            ]
+          },
+          "descontoAntecipacao": {
+            "type": "number"
+          },
+          "descontos": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "numeroOrdem": {
+                  "type": "number"
+                },
+                "valorDesconto": {
+                  "type": "number"
+                },
+                "dataLimite": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "numeroOrdem",
+                "valorDesconto",
+                "dataLimite"
+              ]
+            }
+          },
+          "dadosLiquidacao": {
+            "type": "object",
+            "properties": {
+              "data": {
+                "type": "string"
+              },
+              "valor": {
+                "type": "number"
+              },
+              "multa": {
+                "type": "number"
+              },
+              "abatimento": {
+                "type": "number"
+              },
+              "juros": {
+                "type": "number"
+              },
+              "desconto": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "data",
+              "valor",
+              "multa",
+              "abatimento",
+              "juros",
+              "desconto"
+            ]
+          },
+          "dataMovimento": {
+            "type": "string"
+          },
+          "dataPrevisaoPagamento": {
+            "type": "string"
+          },
+          "boletoComSplit": {
+            "type": "string",
+            "enum": [
+              "SIM",
+              "NAO"
+            ]
+          }
+        }
+      },
+      "ErrorResponseEntity": {
+        "type": "object",
+        "properties": {
+          "timestamp": {
+            "type": "string"
+          },
+          "path": {
+            "type": "string"
+          },
+          "status": {
+            "type": "number"
+          },
+          "error": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "requestId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error"
+        ]
+      }
+    },
+    "responses": {},
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}
