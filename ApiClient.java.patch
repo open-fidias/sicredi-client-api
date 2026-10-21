@@ -1,0 +1,26 @@
+diff --git a/src/main/java/br/com/fidias/sicredi_cobranca/ApiClient.java b/src/main/java/br/com/fidias/pegasus_client/ApiClient.java
+index 3d2b6f7..bbc7850 100644
+--- a/src/main/java/br/com/fidias/sicredi_cobranca/ApiClient.java
++++ b/src/main/java/br/com/fidias/sicredi_cobranca/ApiClient.java
+@@ -341,6 +341,21 @@ public class ApiClient {
+         throw new RuntimeException("No OAuth2 authentication configured!");
+     }
+
++    /**
++     * Helper method to set access token for the first OAuth2 authentication.
++     *
++     * @param bearerToken
++     */
++    public void setBearerToken(String bearerToken) {
++        for (Authentication auth : authentications.values()) {
++            if (auth instanceof HttpBearerAuth) {
++                ((HttpBearerAuth) auth).setBearerToken(bearerToken);
++                return;
++            }
++        }
++        throw new RuntimeException("No Bearer Token authentication configured!");
++    }
++
+     /**
+      * Set the User-Agent header's value (by adding to the default header map).
+      *

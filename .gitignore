@@ -112,3 +112,4 @@ public/
 
 # End of https://www.gitignore.io/api/node,maven
 tmp-build
+/nbproject/private/
