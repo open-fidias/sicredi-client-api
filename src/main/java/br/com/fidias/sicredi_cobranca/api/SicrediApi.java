@@ -61,8 +61,6 @@ public class SicrediApi {
 
     /**
      * Build call for cadastrarBoleto
-     * @param authorization  (optional)
-     * @param contentType  (optional)
      * @param cooperativa  (optional)
      * @param posto  (optional)
      * @param xApiKey  (optional)
@@ -76,7 +74,7 @@ public class SicrediApi {
         <tr><td> 201 </td><td> Successful response </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call cadastrarBoletoCall(String authorization, String contentType, String cooperativa, String posto, String xApiKey, CadastrarBoletoFormEntity cadastrarBoletoFormEntity, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call cadastrarBoletoCall(String cooperativa, String posto, String xApiKey, CadastrarBoletoFormEntity cadastrarBoletoFormEntity, final ApiCallback _callback) throws ApiException {
         Object localVarPostBody = cadastrarBoletoFormEntity;
 
         // create path and map variables
@@ -85,14 +83,6 @@ public class SicrediApi {
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        if (authorization != null) {
-            localVarHeaderParams.put("Authorization", localVarApiClient.parameterToString(authorization));
-        }
-
-        if (contentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarApiClient.parameterToString(contentType));
-        }
-
         if (cooperativa != null) {
             localVarHeaderParams.put("cooperativa", localVarApiClient.parameterToString(cooperativa));
         }
@@ -126,10 +116,10 @@ public class SicrediApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call cadastrarBoletoValidateBeforeCall(String authorization, String contentType, String cooperativa, String posto, String xApiKey, CadastrarBoletoFormEntity cadastrarBoletoFormEntity, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call cadastrarBoletoValidateBeforeCall(String cooperativa, String posto, String xApiKey, CadastrarBoletoFormEntity cadastrarBoletoFormEntity, final ApiCallback _callback) throws ApiException {
         
 
-        okhttp3.Call localVarCall = cadastrarBoletoCall(authorization, contentType, cooperativa, posto, xApiKey, cadastrarBoletoFormEntity, _callback);
+        okhttp3.Call localVarCall = cadastrarBoletoCall(cooperativa, posto, xApiKey, cadastrarBoletoFormEntity, _callback);
         return localVarCall;
 
     }
@@ -137,8 +127,6 @@ public class SicrediApi {
     /**
      * Cadastrar Boleto
      * Cadastra um boleto (Tradicional, Híbrido ou com Split de crédito).
-     * @param authorization  (optional)
-     * @param contentType  (optional)
      * @param cooperativa  (optional)
      * @param posto  (optional)
      * @param xApiKey  (optional)
@@ -151,16 +139,14 @@ public class SicrediApi {
         <tr><td> 201 </td><td> Successful response </td><td>  -  </td></tr>
      </table>
      */
-    public CadastrarBoletoResponseEntity cadastrarBoleto(String authorization, String contentType, String cooperativa, String posto, String xApiKey, CadastrarBoletoFormEntity cadastrarBoletoFormEntity) throws ApiException {
-        ApiResponse<CadastrarBoletoResponseEntity> localVarResp = cadastrarBoletoWithHttpInfo(authorization, contentType, cooperativa, posto, xApiKey, cadastrarBoletoFormEntity);
+    public CadastrarBoletoResponseEntity cadastrarBoleto(String cooperativa, String posto, String xApiKey, CadastrarBoletoFormEntity cadastrarBoletoFormEntity) throws ApiException {
+        ApiResponse<CadastrarBoletoResponseEntity> localVarResp = cadastrarBoletoWithHttpInfo(cooperativa, posto, xApiKey, cadastrarBoletoFormEntity);
         return localVarResp.getData();
     }
 
     /**
      * Cadastrar Boleto
      * Cadastra um boleto (Tradicional, Híbrido ou com Split de crédito).
-     * @param authorization  (optional)
-     * @param contentType  (optional)
      * @param cooperativa  (optional)
      * @param posto  (optional)
      * @param xApiKey  (optional)
@@ -173,8 +159,8 @@ public class SicrediApi {
         <tr><td> 201 </td><td> Successful response </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<CadastrarBoletoResponseEntity> cadastrarBoletoWithHttpInfo(String authorization, String contentType, String cooperativa, String posto, String xApiKey, CadastrarBoletoFormEntity cadastrarBoletoFormEntity) throws ApiException {
-        okhttp3.Call localVarCall = cadastrarBoletoValidateBeforeCall(authorization, contentType, cooperativa, posto, xApiKey, cadastrarBoletoFormEntity, null);
+    public ApiResponse<CadastrarBoletoResponseEntity> cadastrarBoletoWithHttpInfo(String cooperativa, String posto, String xApiKey, CadastrarBoletoFormEntity cadastrarBoletoFormEntity) throws ApiException {
+        okhttp3.Call localVarCall = cadastrarBoletoValidateBeforeCall(cooperativa, posto, xApiKey, cadastrarBoletoFormEntity, null);
         Type localVarReturnType = new TypeToken<CadastrarBoletoResponseEntity>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -182,8 +168,6 @@ public class SicrediApi {
     /**
      * Cadastrar Boleto (asynchronously)
      * Cadastra um boleto (Tradicional, Híbrido ou com Split de crédito).
-     * @param authorization  (optional)
-     * @param contentType  (optional)
      * @param cooperativa  (optional)
      * @param posto  (optional)
      * @param xApiKey  (optional)
@@ -197,9 +181,9 @@ public class SicrediApi {
         <tr><td> 201 </td><td> Successful response </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call cadastrarBoletoAsync(String authorization, String contentType, String cooperativa, String posto, String xApiKey, CadastrarBoletoFormEntity cadastrarBoletoFormEntity, final ApiCallback<CadastrarBoletoResponseEntity> _callback) throws ApiException {
+    public okhttp3.Call cadastrarBoletoAsync(String cooperativa, String posto, String xApiKey, CadastrarBoletoFormEntity cadastrarBoletoFormEntity, final ApiCallback<CadastrarBoletoResponseEntity> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = cadastrarBoletoValidateBeforeCall(authorization, contentType, cooperativa, posto, xApiKey, cadastrarBoletoFormEntity, _callback);
+        okhttp3.Call localVarCall = cadastrarBoletoValidateBeforeCall(cooperativa, posto, xApiKey, cadastrarBoletoFormEntity, _callback);
         Type localVarReturnType = new TypeToken<CadastrarBoletoResponseEntity>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;

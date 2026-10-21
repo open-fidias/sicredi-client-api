@@ -18,7 +18,7 @@ import br.com.fidias.sicredi_cobranca.Pair;
 import java.util.Map;
 import java.util.List;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-10-21T11:36:08.786-03:00[America/Fortaleza]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-10-21T16:08:00.274-03:00[America/Fortaleza]")
 public class ApiKeyAuth implements Authentication {
   private final String location;
   private final String paramName;

@@ -53,20 +53,12 @@
         },
         "parameters": [
           {
-            "name": "Content-Type",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "application/x-www-form-urlencoded"
-          },
-          {
             "name": "x-api-key",
             "in": "header",
             "schema": {
               "type": "string"
             },
-            "example": "xxxxxxxx-xxxx-xxxe-xxxx-xxxxxxxxxx"
+            "example": "\"xxxxxxxx-xxxx-xxxe-xxxx-xxxxxxxxxx\""
           },
           {
             "name": "context",
@@ -137,27 +129,12 @@
         },
         "parameters": [
           {
-            "name": "Authorization",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "Content-Type",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "application/json"
-          },
-          {
             "name": "cooperativa",
             "in": "header",
             "schema": {
               "type": "string"
             },
-            "example": "6789"
+            "example": "\"6789\""
           },
           {
             "name": "posto",
@@ -165,7 +142,7 @@
             "schema": {
               "type": "string"
             },
-            "example": "03"
+            "example": "\"03\""
           },
           {
             "name": "x-api-key",
@@ -173,7 +150,7 @@
             "schema": {
               "type": "string"
             },
-            "example": "xxxxxxxx-xxxx-xxxe-xxxx-xxxxxxxxxx"
+            "example": "\"xxxxxxxx-xxxx-xxxe-xxxx-xxxxxxxxxx\""
           }
         ],
         "responses": {
@@ -223,7 +200,7 @@
             "schema": {
               "type": "string"
             },
-            "example": "6789"
+            "example": "\"6789\""
           },
           {
             "name": "posto",
@@ -231,7 +208,7 @@
             "schema": {
               "type": "string"
             },
-            "example": "03"
+            "example": "\"03\""
           },
           {
             "name": "x-api-key",
@@ -239,7 +216,7 @@
             "schema": {
               "type": "string"
             },
-            "example": "xxxxxxxx-xxxx-xxxe-xxxx-xxxxxxxxxx"
+            "example": "\"xxxxxxxx-xxxx-xxxe-xxxx-xxxxxxxxxx\""
           },
           {
             "name": "codigoBeneficiario",
@@ -332,7 +309,7 @@
             "schema": {
               "type": "string"
             },
-            "example": "6789"
+            "example": "\"6789\""
           },
           {
             "name": "posto",
@@ -340,7 +317,7 @@
             "schema": {
               "type": "string"
             },
-            "example": "03"
+            "example": "\"03\""
           },
           {
             "name": "x-api-key",
@@ -348,7 +325,7 @@
             "schema": {
               "type": "string"
             },
-            "example": "xxxxxxxx-xxxx-xxxe-xxxx-xxxxxxxxxx"
+            "example": "\"xxxxxxxx-xxxx-xxxe-xxxx-xxxxxxxxxx\""
           }
         ],
         "responses": {
@@ -389,7 +366,7 @@
             "schema": {
               "type": "string"
             },
-            "example": "xxxxxxxx-xxxx-xxxe-xxxx-xxxxxxxxxx"
+            "example": "\"xxxxxxxx-xxxx-xxxe-xxxx-xxxxxxxxxx\""
           },
           {
             "name": "posto",
@@ -397,7 +374,7 @@
             "schema": {
               "type": "string"
             },
-            "example": "03"
+            "example": "\"03\""
           },
           {
             "name": "cooperativa",
@@ -405,7 +382,7 @@
             "schema": {
               "type": "string"
             },
-            "example": "6789"
+            "example": "\"6789\""
           },
           {
             "name": "Content-Type",

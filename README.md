@@ -2,7 +2,7 @@
 
 Sicredi - API Cobranca
 - API version: 1.0.0
-  - Build date: 2026-10-21T11:36:08.786-03:00[America/Fortaleza]
+  - Build date: 2026-10-21T16:08:00.274-03:00[America/Fortaleza]
 
 API para integração de Cobrança Bancária pelo Sicredi
 
@@ -86,14 +86,12 @@ public class Example {
     defaultClient.setBasePath("https://api-parceiro.sicredi.com.br");
 
     SicrediApi apiInstance = new SicrediApi(defaultClient);
-    String authorization = "authorization_example"; // String | 
-    String contentType = application/json; // String | 
-    String cooperativa = 6789; // String | 
-    String posto = 03; // String | 
-    String xApiKey = xxxxxxxx-xxxx-xxxe-xxxx-xxxxxxxxxx; // String | 
+    String cooperativa = "6789"; // String | 
+    String posto = "03"; // String | 
+    String xApiKey = "xxxxxxxx-xxxx-xxxe-xxxx-xxxxxxxxxx"; // String | 
     CadastrarBoletoFormEntity cadastrarBoletoFormEntity = new CadastrarBoletoFormEntity(); // CadastrarBoletoFormEntity | 
     try {
-      CadastrarBoletoResponseEntity result = apiInstance.cadastrarBoleto(authorization, contentType, cooperativa, posto, xApiKey, cadastrarBoletoFormEntity);
+      CadastrarBoletoResponseEntity result = apiInstance.cadastrarBoleto(cooperativa, posto, xApiKey, cadastrarBoletoFormEntity);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling SicrediApi#cadastrarBoleto");

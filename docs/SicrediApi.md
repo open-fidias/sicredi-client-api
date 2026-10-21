@@ -30,7 +30,7 @@ Method | HTTP request | Description
 
 <a name="cadastrarBoleto"></a>
 # **cadastrarBoleto**
-> CadastrarBoletoResponseEntity cadastrarBoleto(authorization, contentType, cooperativa, posto, xApiKey, cadastrarBoletoFormEntity)
+> CadastrarBoletoResponseEntity cadastrarBoleto(cooperativa, posto, xApiKey, cadastrarBoletoFormEntity)
 
 Cadastrar Boleto
 
@@ -51,14 +51,12 @@ public class Example {
     defaultClient.setBasePath("https://api-parceiro.sicredi.com.br");
 
     SicrediApi apiInstance = new SicrediApi(defaultClient);
-    String authorization = "authorization_example"; // String | 
-    String contentType = application/json; // String | 
-    String cooperativa = 6789; // String | 
-    String posto = 03; // String | 
-    String xApiKey = xxxxxxxx-xxxx-xxxe-xxxx-xxxxxxxxxx; // String | 
+    String cooperativa = "6789"; // String | 
+    String posto = "03"; // String | 
+    String xApiKey = "xxxxxxxx-xxxx-xxxe-xxxx-xxxxxxxxxx"; // String | 
     CadastrarBoletoFormEntity cadastrarBoletoFormEntity = new CadastrarBoletoFormEntity(); // CadastrarBoletoFormEntity | 
     try {
-      CadastrarBoletoResponseEntity result = apiInstance.cadastrarBoleto(authorization, contentType, cooperativa, posto, xApiKey, cadastrarBoletoFormEntity);
+      CadastrarBoletoResponseEntity result = apiInstance.cadastrarBoleto(cooperativa, posto, xApiKey, cadastrarBoletoFormEntity);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling SicrediApi#cadastrarBoleto");
@@ -75,8 +73,6 @@ public class Example {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **String**|  | [optional]
- **contentType** | **String**|  | [optional]
  **cooperativa** | **String**|  | [optional]
  **posto** | **String**|  | [optional]
  **xApiKey** | **String**|  | [optional]
@@ -1270,9 +1266,9 @@ public class Example {
     String authorization = Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJBU0ZSSm1VMTBwaWRpbzFlQ254cXUzV2VwaDFjX2xJWFJDVXk5ZGpTZ0drIn0.eyJleHAiOjE3MjA1Mzc2OTksImlhdCI6MTcyMDUzNDA5OSwianRpIjoiMTJjMDFhY2UtYzM0ZS00NWI2LTliMjgtODhiZGRhNDA4NDc1IiwiaXNzIjoiaHR0cHM6Ly9hdXRoLW9wZW5hcGkudWF0LnNpY3JlZGkuY2xvdWQvcmVhbG1zL29wZW5hcGkiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiZjo4YjU0NzRmZi0xZThlLTRiNzYtOWYyYS1iNmExYTIxMzgzZjY6Q09CUkFOQ0E6MTIzNDU2Nzg5IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoib3BlbmFwaS1ndy1zZW5zZWRpYSIsInNlc3Npb25fc3RhdGUiOiI4ZGI5NDQzOS00NjM5LTQ5YTYtYTc3OS1hYjU5YTY0NDhlOGIiLCJhY3IiOiIxIiwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbImRlZmF1bHQtcm9sZXMtb3BlbmFwaSIsIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6ImNvYnJhbmNhIGVtYWlsIHByb2ZpbGUiLCJzaWQiOiI4ZGI5NDQzOS00NjM5LTQ5YTYtYTc3OS1hYjU5YTY0NDhlOGIiLCJvcGVuYXBpX3VzZXJuYW1lIjoiMTIzNDU2Nzg5Iiwib3BlbmFwaV9jb250ZXh0IjoiQ09CUkFOQ0EiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInByZWZlcnJlZF91c2VybmFtZSI6IjEyMzQ1Njc4OSJ9.EDCypmbGnyFrQhNqQbIsHUeQ0DDZ_dTJ1OYKnJSlDSVlkgFgPMQTnN373Kq5QfTWCMiOX4z4muk_05Y96Sk1mVO2deAopsgEnG0yZSrygnGg3JnvLrM_iWdzGjoagkc7yaRrbhgIKdnmdAPUNvyWK8sjzTZtTFU1_OPPLZXhAlH5E59d1jkLoAQZJ6wTA7Aocdh6dZBX2QJ5fiaS5NOlGcNdKHvPmSZ2iac7lc5XdirgXtedlDGi2VmWnUO9VKDxTKKDhJdYNB2QG8GMvTmWtj5v3cFXFIPFzS4D8SB5gQQwKF0_bPjwIvsJXk24zUMIbXqVLVBHWoNKmEw1YNBwiA; // String | 
     String contentType = application/json; // String | 
     String codigoBeneficiario = 12345; // String | 
-    String cooperativa = 6789; // String | 
-    String posto = 03; // String | 
-    String xApiKey = xxxxxxxx-xxxx-xxxe-xxxx-xxxxxxxxxx; // String | 
+    String cooperativa = "6789"; // String | 
+    String posto = "03"; // String | 
+    String xApiKey = "xxxxxxxx-xxxx-xxxe-xxxx-xxxxxxxxxx"; // String | 
     Object body = null; // Object | 
     try {
       apiInstance.cobrancaBoletoV1BoletosNossoNumeroBaixaPatch(nossoNumero, authorization, contentType, codigoBeneficiario, cooperativa, posto, xApiKey, body);
@@ -1418,9 +1414,9 @@ public class Example {
     SicrediApi apiInstance = new SicrediApi(defaultClient);
     String authorization = "authorization_example"; // String | 
     String contentType = application/x-www-form-urlencoded; // String | 
-    String cooperativa = 6789; // String | 
-    String posto = 03; // String | 
-    String xApiKey = xxxxxxxx-xxxx-xxxe-xxxx-xxxxxxxxxx; // String | 
+    String cooperativa = "6789"; // String | 
+    String posto = "03"; // String | 
+    String xApiKey = "xxxxxxxx-xxxx-xxxe-xxxx-xxxxxxxxxx"; // String | 
     String codigoBeneficiario = 12345; // String | 
     String nossoNumero = 211001293; // String | 
     try {
@@ -1567,9 +1563,9 @@ public class Example {
 
     SicrediApi apiInstance = new SicrediApi(defaultClient);
     String authorization = Bearer eyJ0eXAiOiJKV1QiLCJraWQiOiIzMWVkMTk1My02YzM1LTRjMWMtOGJmMy1jNTkwZGI4NzE4ZTciLCJhbGciOiJSUzI1NiJ9.eyJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJ0eXAiOiJCZWFyZXIiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiIxMjM0NTY3ODkiLCJzaWQiOiI5MmYyYzQwNy1kOTFkLTQ2YjMtOTk4YS1kZDdmYWMxNjUwZTAiLCJhY3IiOiIxIiwib3BlbmFwaV91c2VybmFtZSI6IjEyMzQ1Njc4OSIsIm9wZW5hcGlfY29udGV4dCI6IkNPQlJBTkNBIiwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbImRlZmF1bHQtcm9sZXMtb3BlbmFwaSIsIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iXX0sImF6cCI6Im9wZW5hcGktZ3ctc2Vuc2VkaWEiLCJzY29wZSI6ImNvYnJhbmNhIGVtYWlsIHByb2ZpbGUiLCJzZXNzaW9uX3N0YXRlIjoiOTJmMmM0MDctZDkxZC00NmIzLTk5OGEtZGQ3ZmFjMTY1MGUwIiwianRpIjoiOTJmMmM0MDctZDkxZC00NmIzLTk5OGEtZGQ3ZmFjMTY1MGUwIiwic3ViIjoiZjoxMTUzM2NmOS03Mzk0LTRjMzYtOWRhYS01ZTk4ZjRkN2FkYzM6Q09CUkFOQ0E6MTIzNDU2Nzg5IiwiaXNzIjoiaHR0cHM6Ly9hdXRoLW9wZW5hcGkudWF0LnNpY3JlZGkuY2xvdWQvcmVhbG1zL29wZW5hcGkiLCJpYXQiOjE3MDM3NjgxNjAsImV4cCI6MTcwMzc3MTc2MCwiYXVkIjoiYWNjb3VudCJ9.f6mjyci9fMEW_Zgif1bUR_cZVYTwEyLuHzD6ydnI63RysyswYGdFxoLoFlJCku-42E3vskCinjQpJ2GJoCFqxLL_idi00NNybEfR2E9EInVDwPFMSCIjK8z20692epFeFy18jXfqn1MFJ6KKEojnBvBCWZVhcXQFcjo0kXxZ_JOXpmLU4-YYe1XseGQ0D1YIZAn5F2iAMSMzWKvgragPnjadIIs95z3YPeWCNqBlU4pnhv8qSLv0hgPUaZgZLc9Nt5xJdDA-JwCVdlgaNk57ADG13LTgMYDT95CjgpCphY8Kl91-hc9tZeMlcR-_9SuLAfXYE0dUXiBi6rYzZK5-nw; // String | 
-    String xApiKey = xxxxxxxx-xxxx-xxxe-xxxx-xxxxxxxxxx; // String | 
-    String posto = 03; // String | 
-    String cooperativa = 6789; // String | 
+    String xApiKey = "xxxxxxxx-xxxx-xxxe-xxxx-xxxxxxxxxx"; // String | 
+    String posto = "03"; // String | 
+    String cooperativa = "6789"; // String | 
     String contentType = application/json; // String | 
     String linhaDigitavel = 74891121150039736789903123451001187340000000050; // String | 
     try {

@@ -47,13 +47,11 @@ public class SicrediApiTest {
      */
     @Test
     public void cadastrarBoletoTest() throws ApiException {
-        String authorization = null;
-        String contentType = null;
         String cooperativa = null;
         String posto = null;
         String xApiKey = null;
         CadastrarBoletoFormEntity cadastrarBoletoFormEntity = null;
-        CadastrarBoletoResponseEntity response = api.cadastrarBoleto(authorization, contentType, cooperativa, posto, xApiKey, cadastrarBoletoFormEntity);
+        CadastrarBoletoResponseEntity response = api.cadastrarBoleto(cooperativa, posto, xApiKey, cadastrarBoletoFormEntity);
 
         // TODO: test validations
     }

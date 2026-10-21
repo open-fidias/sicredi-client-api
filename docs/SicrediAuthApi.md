@@ -9,7 +9,7 @@ Method | HTTP request | Description
 
 <a name="autenticacao"></a>
 # **autenticacao**
-> AutenticacaoResponseEntity autenticacao(grantType, contentType, xApiKey, context, username, password, refreshToken, scope)
+> AutenticacaoResponseEntity autenticacao(grantType, xApiKey, context, username, password, refreshToken, scope)
 
 Autenticação
 
@@ -31,15 +31,14 @@ public class Example {
 
     SicrediAuthApi apiInstance = new SicrediAuthApi(defaultClient);
     String grantType = "grantType_example"; // String | 
-    String contentType = application/x-www-form-urlencoded; // String | 
-    String xApiKey = xxxxxxxx-xxxx-xxxe-xxxx-xxxxxxxxxx; // String | 
+    String xApiKey = "xxxxxxxx-xxxx-xxxe-xxxx-xxxxxxxxxx"; // String | 
     String context = COBRANCA; // String | 
     String username = "username_example"; // String | 
     String password = "password_example"; // String | 
     String refreshToken = "refreshToken_example"; // String | 
     String scope = "scope_example"; // String | 
     try {
-      AutenticacaoResponseEntity result = apiInstance.autenticacao(grantType, contentType, xApiKey, context, username, password, refreshToken, scope);
+      AutenticacaoResponseEntity result = apiInstance.autenticacao(grantType, xApiKey, context, username, password, refreshToken, scope);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling SicrediAuthApi#autenticacao");
@@ -57,7 +56,6 @@ public class Example {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **grantType** | **String**|  | [enum: password, refresh_token]
- **contentType** | **String**|  | [optional]
  **xApiKey** | **String**|  | [optional]
  **context** | **String**|  | [optional]
  **username** | **String**|  | [optional]

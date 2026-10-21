@@ -58,7 +58,6 @@ public class SicrediAuthApi {
     /**
      * Build call for autenticacao
      * @param grantType  (required)
-     * @param contentType  (optional)
      * @param xApiKey  (optional)
      * @param context  (optional)
      * @param username  (optional)
@@ -76,7 +75,7 @@ public class SicrediAuthApi {
         <tr><td> 401 </td><td> Token ausente, inválido ou expirado </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call autenticacaoCall(String grantType, String contentType, String xApiKey, String context, String username, String password, String refreshToken, String scope, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call autenticacaoCall(String grantType, String xApiKey, String context, String username, String password, String refreshToken, String scope, final ApiCallback _callback) throws ApiException {
         Object localVarPostBody = null;
 
         // create path and map variables
@@ -85,10 +84,6 @@ public class SicrediAuthApi {
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        if (contentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarApiClient.parameterToString(contentType));
-        }
-
         if (xApiKey != null) {
             localVarHeaderParams.put("x-api-key", localVarApiClient.parameterToString(xApiKey));
         }
@@ -138,7 +133,7 @@ public class SicrediAuthApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call autenticacaoValidateBeforeCall(String grantType, String contentType, String xApiKey, String context, String username, String password, String refreshToken, String scope, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call autenticacaoValidateBeforeCall(String grantType, String xApiKey, String context, String username, String password, String refreshToken, String scope, final ApiCallback _callback) throws ApiException {
         
         // verify the required parameter 'grantType' is set
         if (grantType == null) {
@@ -146,7 +141,7 @@ public class SicrediAuthApi {
         }
         
 
-        okhttp3.Call localVarCall = autenticacaoCall(grantType, contentType, xApiKey, context, username, password, refreshToken, scope, _callback);
+        okhttp3.Call localVarCall = autenticacaoCall(grantType, xApiKey, context, username, password, refreshToken, scope, _callback);
         return localVarCall;
 
     }
@@ -155,7 +150,6 @@ public class SicrediAuthApi {
      * Autenticação
      * Gera um token JWT para autenticação nas demais operações. O access_token expira em 300s. Use o refresh_token para renovar.
      * @param grantType  (required)
-     * @param contentType  (optional)
      * @param xApiKey  (optional)
      * @param context  (optional)
      * @param username  (optional)
@@ -172,8 +166,8 @@ public class SicrediAuthApi {
         <tr><td> 401 </td><td> Token ausente, inválido ou expirado </td><td>  -  </td></tr>
      </table>
      */
-    public AutenticacaoResponseEntity autenticacao(String grantType, String contentType, String xApiKey, String context, String username, String password, String refreshToken, String scope) throws ApiException {
-        ApiResponse<AutenticacaoResponseEntity> localVarResp = autenticacaoWithHttpInfo(grantType, contentType, xApiKey, context, username, password, refreshToken, scope);
+    public AutenticacaoResponseEntity autenticacao(String grantType, String xApiKey, String context, String username, String password, String refreshToken, String scope) throws ApiException {
+        ApiResponse<AutenticacaoResponseEntity> localVarResp = autenticacaoWithHttpInfo(grantType, xApiKey, context, username, password, refreshToken, scope);
         return localVarResp.getData();
     }
 
@@ -181,7 +175,6 @@ public class SicrediAuthApi {
      * Autenticação
      * Gera um token JWT para autenticação nas demais operações. O access_token expira em 300s. Use o refresh_token para renovar.
      * @param grantType  (required)
-     * @param contentType  (optional)
      * @param xApiKey  (optional)
      * @param context  (optional)
      * @param username  (optional)
@@ -198,8 +191,8 @@ public class SicrediAuthApi {
         <tr><td> 401 </td><td> Token ausente, inválido ou expirado </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<AutenticacaoResponseEntity> autenticacaoWithHttpInfo(String grantType, String contentType, String xApiKey, String context, String username, String password, String refreshToken, String scope) throws ApiException {
-        okhttp3.Call localVarCall = autenticacaoValidateBeforeCall(grantType, contentType, xApiKey, context, username, password, refreshToken, scope, null);
+    public ApiResponse<AutenticacaoResponseEntity> autenticacaoWithHttpInfo(String grantType, String xApiKey, String context, String username, String password, String refreshToken, String scope) throws ApiException {
+        okhttp3.Call localVarCall = autenticacaoValidateBeforeCall(grantType, xApiKey, context, username, password, refreshToken, scope, null);
         Type localVarReturnType = new TypeToken<AutenticacaoResponseEntity>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -208,7 +201,6 @@ public class SicrediAuthApi {
      * Autenticação (asynchronously)
      * Gera um token JWT para autenticação nas demais operações. O access_token expira em 300s. Use o refresh_token para renovar.
      * @param grantType  (required)
-     * @param contentType  (optional)
      * @param xApiKey  (optional)
      * @param context  (optional)
      * @param username  (optional)
@@ -226,9 +218,9 @@ public class SicrediAuthApi {
         <tr><td> 401 </td><td> Token ausente, inválido ou expirado </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call autenticacaoAsync(String grantType, String contentType, String xApiKey, String context, String username, String password, String refreshToken, String scope, final ApiCallback<AutenticacaoResponseEntity> _callback) throws ApiException {
+    public okhttp3.Call autenticacaoAsync(String grantType, String xApiKey, String context, String username, String password, String refreshToken, String scope, final ApiCallback<AutenticacaoResponseEntity> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = autenticacaoValidateBeforeCall(grantType, contentType, xApiKey, context, username, password, refreshToken, scope, _callback);
+        okhttp3.Call localVarCall = autenticacaoValidateBeforeCall(grantType, xApiKey, context, username, password, refreshToken, scope, _callback);
         Type localVarReturnType = new TypeToken<AutenticacaoResponseEntity>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;

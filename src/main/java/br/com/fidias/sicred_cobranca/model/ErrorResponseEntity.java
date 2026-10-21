@@ -28,7 +28,7 @@ import java.math.BigDecimal;
 /**
  * ErrorResponseEntity
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-10-21T11:36:08.786-03:00[America/Fortaleza]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-10-21T16:08:00.274-03:00[America/Fortaleza]")
 public class ErrorResponseEntity {
   public static final String SERIALIZED_NAME_TIMESTAMP = "timestamp";
   @SerializedName(SERIALIZED_NAME_TIMESTAMP)

@@ -44,14 +44,13 @@ public class SicrediAuthApiTest {
     @Test
     public void autenticacaoTest() throws ApiException {
         String grantType = null;
-        String contentType = null;
         String xApiKey = null;
         String context = null;
         String username = null;
         String password = null;
         String refreshToken = null;
         String scope = null;
-        AutenticacaoResponseEntity response = api.autenticacao(grantType, contentType, xApiKey, context, username, password, refreshToken, scope);
+        AutenticacaoResponseEntity response = api.autenticacao(grantType, xApiKey, context, username, password, refreshToken, scope);
 
         // TODO: test validations
     }
