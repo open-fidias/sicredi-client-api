@@ -1541,7 +1541,7 @@ No authorization required
 
 <a name="imprimirBoleto"></a>
 # **imprimirBoleto**
-> File imprimirBoleto(authorization, xApiKey, posto, cooperativa, contentType, linhaDigitavel)
+> File imprimirBoleto(xApiKey, posto, cooperativa, linhaDigitavel)
 
 Imprimir Boleto (PDF)
 
@@ -1562,14 +1562,12 @@ public class Example {
     defaultClient.setBasePath("https://api-parceiro.sicredi.com.br");
 
     SicrediApi apiInstance = new SicrediApi(defaultClient);
-    String authorization = Bearer eyJ0eXAiOiJKV1QiLCJraWQiOiIzMWVkMTk1My02YzM1LTRjMWMtOGJmMy1jNTkwZGI4NzE4ZTciLCJhbGciOiJSUzI1NiJ9.eyJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJ0eXAiOiJCZWFyZXIiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiIxMjM0NTY3ODkiLCJzaWQiOiI5MmYyYzQwNy1kOTFkLTQ2YjMtOTk4YS1kZDdmYWMxNjUwZTAiLCJhY3IiOiIxIiwib3BlbmFwaV91c2VybmFtZSI6IjEyMzQ1Njc4OSIsIm9wZW5hcGlfY29udGV4dCI6IkNPQlJBTkNBIiwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbImRlZmF1bHQtcm9sZXMtb3BlbmFwaSIsIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iXX0sImF6cCI6Im9wZW5hcGktZ3ctc2Vuc2VkaWEiLCJzY29wZSI6ImNvYnJhbmNhIGVtYWlsIHByb2ZpbGUiLCJzZXNzaW9uX3N0YXRlIjoiOTJmMmM0MDctZDkxZC00NmIzLTk5OGEtZGQ3ZmFjMTY1MGUwIiwianRpIjoiOTJmMmM0MDctZDkxZC00NmIzLTk5OGEtZGQ3ZmFjMTY1MGUwIiwic3ViIjoiZjoxMTUzM2NmOS03Mzk0LTRjMzYtOWRhYS01ZTk4ZjRkN2FkYzM6Q09CUkFOQ0E6MTIzNDU2Nzg5IiwiaXNzIjoiaHR0cHM6Ly9hdXRoLW9wZW5hcGkudWF0LnNpY3JlZGkuY2xvdWQvcmVhbG1zL29wZW5hcGkiLCJpYXQiOjE3MDM3NjgxNjAsImV4cCI6MTcwMzc3MTc2MCwiYXVkIjoiYWNjb3VudCJ9.f6mjyci9fMEW_Zgif1bUR_cZVYTwEyLuHzD6ydnI63RysyswYGdFxoLoFlJCku-42E3vskCinjQpJ2GJoCFqxLL_idi00NNybEfR2E9EInVDwPFMSCIjK8z20692epFeFy18jXfqn1MFJ6KKEojnBvBCWZVhcXQFcjo0kXxZ_JOXpmLU4-YYe1XseGQ0D1YIZAn5F2iAMSMzWKvgragPnjadIIs95z3YPeWCNqBlU4pnhv8qSLv0hgPUaZgZLc9Nt5xJdDA-JwCVdlgaNk57ADG13LTgMYDT95CjgpCphY8Kl91-hc9tZeMlcR-_9SuLAfXYE0dUXiBi6rYzZK5-nw; // String | 
     String xApiKey = "xxxxxxxx-xxxx-xxxe-xxxx-xxxxxxxxxx"; // String | 
     String posto = "03"; // String | 
     String cooperativa = "6789"; // String | 
-    String contentType = application/json; // String | 
     String linhaDigitavel = 74891121150039736789903123451001187340000000050; // String | 
     try {
-      File result = apiInstance.imprimirBoleto(authorization, xApiKey, posto, cooperativa, contentType, linhaDigitavel);
+      File result = apiInstance.imprimirBoleto(xApiKey, posto, cooperativa, linhaDigitavel);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling SicrediApi#imprimirBoleto");
@@ -1586,11 +1584,9 @@ public class Example {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **String**|  | [optional]
  **xApiKey** | **String**|  | [optional]
  **posto** | **String**|  | [optional]
  **cooperativa** | **String**|  | [optional]
- **contentType** | **String**|  | [optional]
  **linhaDigitavel** | **String**|  | [optional]
 
 ### Return type

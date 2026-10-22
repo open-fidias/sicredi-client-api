@@ -30,7 +30,7 @@ import java.util.List;
 /**
  * ConsultarLiquidadosDiaResponseEntity
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-10-22T10:09:58.490-03:00[America/Fortaleza]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-10-22T15:49:49.390-03:00[America/Fortaleza]")
 public class ConsultarLiquidadosDiaResponseEntity {
   public static final String SERIALIZED_NAME_ITEMS = "items";
   @SerializedName(SERIALIZED_NAME_ITEMS)

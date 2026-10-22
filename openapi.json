@@ -353,14 +353,6 @@
         "operationId": "imprimirBoleto",
         "parameters": [
           {
-            "name": "Authorization",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "Bearer eyJ0eXAiOiJKV1QiLCJraWQiOiIzMWVkMTk1My02YzM1LTRjMWMtOGJmMy1jNTkwZGI4NzE4ZTciLCJhbGciOiJSUzI1NiJ9.eyJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJ0eXAiOiJCZWFyZXIiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiIxMjM0NTY3ODkiLCJzaWQiOiI5MmYyYzQwNy1kOTFkLTQ2YjMtOTk4YS1kZDdmYWMxNjUwZTAiLCJhY3IiOiIxIiwib3BlbmFwaV91c2VybmFtZSI6IjEyMzQ1Njc4OSIsIm9wZW5hcGlfY29udGV4dCI6IkNPQlJBTkNBIiwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbImRlZmF1bHQtcm9sZXMtb3BlbmFwaSIsIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iXX0sImF6cCI6Im9wZW5hcGktZ3ctc2Vuc2VkaWEiLCJzY29wZSI6ImNvYnJhbmNhIGVtYWlsIHByb2ZpbGUiLCJzZXNzaW9uX3N0YXRlIjoiOTJmMmM0MDctZDkxZC00NmIzLTk5OGEtZGQ3ZmFjMTY1MGUwIiwianRpIjoiOTJmMmM0MDctZDkxZC00NmIzLTk5OGEtZGQ3ZmFjMTY1MGUwIiwic3ViIjoiZjoxMTUzM2NmOS03Mzk0LTRjMzYtOWRhYS01ZTk4ZjRkN2FkYzM6Q09CUkFOQ0E6MTIzNDU2Nzg5IiwiaXNzIjoiaHR0cHM6Ly9hdXRoLW9wZW5hcGkudWF0LnNpY3JlZGkuY2xvdWQvcmVhbG1zL29wZW5hcGkiLCJpYXQiOjE3MDM3NjgxNjAsImV4cCI6MTcwMzc3MTc2MCwiYXVkIjoiYWNjb3VudCJ9.f6mjyci9fMEW_Zgif1bUR_cZVYTwEyLuHzD6ydnI63RysyswYGdFxoLoFlJCku-42E3vskCinjQpJ2GJoCFqxLL_idi00NNybEfR2E9EInVDwPFMSCIjK8z20692epFeFy18jXfqn1MFJ6KKEojnBvBCWZVhcXQFcjo0kXxZ_JOXpmLU4-YYe1XseGQ0D1YIZAn5F2iAMSMzWKvgragPnjadIIs95z3YPeWCNqBlU4pnhv8qSLv0hgPUaZgZLc9Nt5xJdDA-JwCVdlgaNk57ADG13LTgMYDT95CjgpCphY8Kl91-hc9tZeMlcR-_9SuLAfXYE0dUXiBi6rYzZK5-nw"
-          },
-          {
             "name": "x-api-key",
             "in": "header",
             "schema": {
@@ -383,14 +375,6 @@
               "type": "string"
             },
             "example": "\"6789\""
-          },
-          {
-            "name": "Content-Type",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "application/json"
           },
           {
             "name": "linhaDigitavel",

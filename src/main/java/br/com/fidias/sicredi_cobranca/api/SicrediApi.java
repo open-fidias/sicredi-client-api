@@ -3278,11 +3278,9 @@ public class SicrediApi {
     }
     /**
      * Build call for imprimirBoleto
-     * @param authorization  (optional)
      * @param xApiKey  (optional)
      * @param posto  (optional)
      * @param cooperativa  (optional)
-     * @param contentType  (optional)
      * @param linhaDigitavel  (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
@@ -3297,7 +3295,7 @@ public class SicrediApi {
         <tr><td> 429 </td><td>  </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call imprimirBoletoCall(String authorization, String xApiKey, String posto, String cooperativa, String contentType, String linhaDigitavel, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call imprimirBoletoCall(String xApiKey, String posto, String cooperativa, String linhaDigitavel, final ApiCallback _callback) throws ApiException {
         Object localVarPostBody = null;
 
         // create path and map variables
@@ -3310,10 +3308,6 @@ public class SicrediApi {
         }
 
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        if (authorization != null) {
-            localVarHeaderParams.put("Authorization", localVarApiClient.parameterToString(authorization));
-        }
-
         if (xApiKey != null) {
             localVarHeaderParams.put("x-api-key", localVarApiClient.parameterToString(xApiKey));
         }
@@ -3324,10 +3318,6 @@ public class SicrediApi {
 
         if (cooperativa != null) {
             localVarHeaderParams.put("cooperativa", localVarApiClient.parameterToString(cooperativa));
-        }
-
-        if (contentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarApiClient.parameterToString(contentType));
         }
 
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
@@ -3351,10 +3341,10 @@ public class SicrediApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call imprimirBoletoValidateBeforeCall(String authorization, String xApiKey, String posto, String cooperativa, String contentType, String linhaDigitavel, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call imprimirBoletoValidateBeforeCall(String xApiKey, String posto, String cooperativa, String linhaDigitavel, final ApiCallback _callback) throws ApiException {
         
 
-        okhttp3.Call localVarCall = imprimirBoletoCall(authorization, xApiKey, posto, cooperativa, contentType, linhaDigitavel, _callback);
+        okhttp3.Call localVarCall = imprimirBoletoCall(xApiKey, posto, cooperativa, linhaDigitavel, _callback);
         return localVarCall;
 
     }
@@ -3362,11 +3352,9 @@ public class SicrediApi {
     /**
      * Imprimir Boleto (PDF)
      * Gera o PDF do boleto para impressão ou reimpressão (2ª via).
-     * @param authorization  (optional)
      * @param xApiKey  (optional)
      * @param posto  (optional)
      * @param cooperativa  (optional)
-     * @param contentType  (optional)
      * @param linhaDigitavel  (optional)
      * @return File
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -3380,19 +3368,17 @@ public class SicrediApi {
         <tr><td> 429 </td><td>  </td><td>  -  </td></tr>
      </table>
      */
-    public File imprimirBoleto(String authorization, String xApiKey, String posto, String cooperativa, String contentType, String linhaDigitavel) throws ApiException {
-        ApiResponse<File> localVarResp = imprimirBoletoWithHttpInfo(authorization, xApiKey, posto, cooperativa, contentType, linhaDigitavel);
+    public File imprimirBoleto(String xApiKey, String posto, String cooperativa, String linhaDigitavel) throws ApiException {
+        ApiResponse<File> localVarResp = imprimirBoletoWithHttpInfo(xApiKey, posto, cooperativa, linhaDigitavel);
         return localVarResp.getData();
     }
 
     /**
      * Imprimir Boleto (PDF)
      * Gera o PDF do boleto para impressão ou reimpressão (2ª via).
-     * @param authorization  (optional)
      * @param xApiKey  (optional)
      * @param posto  (optional)
      * @param cooperativa  (optional)
-     * @param contentType  (optional)
      * @param linhaDigitavel  (optional)
      * @return ApiResponse&lt;File&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -3406,8 +3392,8 @@ public class SicrediApi {
         <tr><td> 429 </td><td>  </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<File> imprimirBoletoWithHttpInfo(String authorization, String xApiKey, String posto, String cooperativa, String contentType, String linhaDigitavel) throws ApiException {
-        okhttp3.Call localVarCall = imprimirBoletoValidateBeforeCall(authorization, xApiKey, posto, cooperativa, contentType, linhaDigitavel, null);
+    public ApiResponse<File> imprimirBoletoWithHttpInfo(String xApiKey, String posto, String cooperativa, String linhaDigitavel) throws ApiException {
+        okhttp3.Call localVarCall = imprimirBoletoValidateBeforeCall(xApiKey, posto, cooperativa, linhaDigitavel, null);
         Type localVarReturnType = new TypeToken<File>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -3415,11 +3401,9 @@ public class SicrediApi {
     /**
      * Imprimir Boleto (PDF) (asynchronously)
      * Gera o PDF do boleto para impressão ou reimpressão (2ª via).
-     * @param authorization  (optional)
      * @param xApiKey  (optional)
      * @param posto  (optional)
      * @param cooperativa  (optional)
-     * @param contentType  (optional)
      * @param linhaDigitavel  (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
@@ -3434,9 +3418,9 @@ public class SicrediApi {
         <tr><td> 429 </td><td>  </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call imprimirBoletoAsync(String authorization, String xApiKey, String posto, String cooperativa, String contentType, String linhaDigitavel, final ApiCallback<File> _callback) throws ApiException {
+    public okhttp3.Call imprimirBoletoAsync(String xApiKey, String posto, String cooperativa, String linhaDigitavel, final ApiCallback<File> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = imprimirBoletoValidateBeforeCall(authorization, xApiKey, posto, cooperativa, contentType, linhaDigitavel, _callback);
+        okhttp3.Call localVarCall = imprimirBoletoValidateBeforeCall(xApiKey, posto, cooperativa, linhaDigitavel, _callback);
         Type localVarReturnType = new TypeToken<File>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;

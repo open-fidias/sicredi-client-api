@@ -513,13 +513,11 @@ public class SicrediApiTest {
      */
     @Test
     public void imprimirBoletoTest() throws ApiException {
-        String authorization = null;
         String xApiKey = null;
         String posto = null;
         String cooperativa = null;
-        String contentType = null;
         String linhaDigitavel = null;
-        File response = api.imprimirBoleto(authorization, xApiKey, posto, cooperativa, contentType, linhaDigitavel);
+        File response = api.imprimirBoleto(xApiKey, posto, cooperativa, linhaDigitavel);
 
         // TODO: test validations
     }
