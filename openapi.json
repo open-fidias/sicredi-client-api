@@ -2097,6 +2097,12 @@
               },
               "uf": {
                 "type": "string"
+              },
+              "telefone": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string"
               }
             },
             "required": [
@@ -2155,6 +2161,12 @@
                 "type": "string"
               },
               "uf": {
+                "type": "string"
+              },
+              "telefone": {
+                "type": "string"
+              },
+              "email": {
                 "type": "string"
               }
             },

@@ -28,7 +28,7 @@ import java.math.BigDecimal;
 /**
  * CadastrarBoletoFormEntityBeneficiarioFinal
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-10-21T16:08:00.274-03:00[America/Fortaleza]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-10-22T10:09:58.490-03:00[America/Fortaleza]")
 public class CadastrarBoletoFormEntityBeneficiarioFinal {
   public static final String SERIALIZED_NAME_CEP = "cep";
   @SerializedName(SERIALIZED_NAME_CEP)
@@ -108,6 +108,14 @@ public class CadastrarBoletoFormEntityBeneficiarioFinal {
   public static final String SERIALIZED_NAME_UF = "uf";
   @SerializedName(SERIALIZED_NAME_UF)
   private String uf;
+
+  public static final String SERIALIZED_NAME_TELEFONE = "telefone";
+  @SerializedName(SERIALIZED_NAME_TELEFONE)
+  private String telefone;
+
+  public static final String SERIALIZED_NAME_EMAIL = "email";
+  @SerializedName(SERIALIZED_NAME_EMAIL)
+  private String email;
 
 
   public CadastrarBoletoFormEntityBeneficiarioFinal cep(BigDecimal cep) {
@@ -291,6 +299,52 @@ public class CadastrarBoletoFormEntityBeneficiarioFinal {
   }
 
 
+  public CadastrarBoletoFormEntityBeneficiarioFinal telefone(String telefone) {
+    
+    this.telefone = telefone;
+    return this;
+  }
+
+   /**
+   * Get telefone
+   * @return telefone
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "")
+
+  public String getTelefone() {
+    return telefone;
+  }
+
+
+  public void setTelefone(String telefone) {
+    this.telefone = telefone;
+  }
+
+
+  public CadastrarBoletoFormEntityBeneficiarioFinal email(String email) {
+    
+    this.email = email;
+    return this;
+  }
+
+   /**
+   * Get email
+   * @return email
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "")
+
+  public String getEmail() {
+    return email;
+  }
+
+
+  public void setEmail(String email) {
+    this.email = email;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -307,12 +361,14 @@ public class CadastrarBoletoFormEntityBeneficiarioFinal {
         Objects.equals(this.nome, cadastrarBoletoFormEntityBeneficiarioFinal.nome) &&
         Objects.equals(this.numeroEndereco, cadastrarBoletoFormEntityBeneficiarioFinal.numeroEndereco) &&
         Objects.equals(this.tipoPessoa, cadastrarBoletoFormEntityBeneficiarioFinal.tipoPessoa) &&
-        Objects.equals(this.uf, cadastrarBoletoFormEntityBeneficiarioFinal.uf);
+        Objects.equals(this.uf, cadastrarBoletoFormEntityBeneficiarioFinal.uf) &&
+        Objects.equals(this.telefone, cadastrarBoletoFormEntityBeneficiarioFinal.telefone) &&
+        Objects.equals(this.email, cadastrarBoletoFormEntityBeneficiarioFinal.email);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(cep, cidade, documento, logradouro, nome, numeroEndereco, tipoPessoa, uf);
+    return Objects.hash(cep, cidade, documento, logradouro, nome, numeroEndereco, tipoPessoa, uf, telefone, email);
   }
 
 
@@ -328,6 +384,8 @@ public class CadastrarBoletoFormEntityBeneficiarioFinal {
     sb.append("    numeroEndereco: ").append(toIndentedString(numeroEndereco)).append("\n");
     sb.append("    tipoPessoa: ").append(toIndentedString(tipoPessoa)).append("\n");
     sb.append("    uf: ").append(toIndentedString(uf)).append("\n");
+    sb.append("    telefone: ").append(toIndentedString(telefone)).append("\n");
+    sb.append("    email: ").append(toIndentedString(email)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -32,7 +32,7 @@ import java.util.List;
 /**
  * CadastrarBoletoFormEntity
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-10-21T16:08:00.274-03:00[America/Fortaleza]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-10-22T10:09:58.490-03:00[America/Fortaleza]")
 public class CadastrarBoletoFormEntity {
   public static final String SERIALIZED_NAME_BENEFICIARIO_FINAL = "beneficiarioFinal";
   @SerializedName(SERIALIZED_NAME_BENEFICIARIO_FINAL)

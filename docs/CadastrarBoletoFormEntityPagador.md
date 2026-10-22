@@ -13,6 +13,8 @@ Name | Type | Description | Notes
 **tipoPessoa** | [**TipoPessoaEnum**](#TipoPessoaEnum) |  | 
 **endereco** | **String** |  |  [optional]
 **uf** | **String** |  |  [optional]
+**telefone** | **String** |  |  [optional]
+**email** | **String** |  |  [optional]
 
 
 

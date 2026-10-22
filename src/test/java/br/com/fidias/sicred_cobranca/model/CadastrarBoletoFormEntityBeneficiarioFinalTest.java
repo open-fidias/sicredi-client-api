@@ -105,4 +105,20 @@ public class CadastrarBoletoFormEntityBeneficiarioFinalTest {
         // TODO: test uf
     }
 
+    /**
+     * Test the property 'telefone'
+     */
+    @Test
+    public void telefoneTest() {
+        // TODO: test telefone
+    }
+
+    /**
+     * Test the property 'email'
+     */
+    @Test
+    public void emailTest() {
+        // TODO: test email
+    }
+
 }

@@ -28,7 +28,7 @@ import java.math.BigDecimal;
 /**
  * ConsultarBoletoResponseEntityDadosLiquidacao
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-10-21T16:08:00.274-03:00[America/Fortaleza]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-10-22T10:09:58.490-03:00[America/Fortaleza]")
 public class ConsultarBoletoResponseEntityDadosLiquidacao {
   public static final String SERIALIZED_NAME_DATA = "data";
   @SerializedName(SERIALIZED_NAME_DATA)

@@ -14,6 +14,8 @@ Name | Type | Description | Notes
 **numeroEndereco** | [**BigDecimal**](BigDecimal.md) |  |  [optional]
 **tipoPessoa** | [**TipoPessoaEnum**](#TipoPessoaEnum) |  | 
 **uf** | **String** |  |  [optional]
+**telefone** | **String** |  |  [optional]
+**email** | **String** |  |  [optional]
 
 
 
